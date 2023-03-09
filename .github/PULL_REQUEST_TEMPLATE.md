@@ -1,17 +1,20 @@
-# Description
+# 📬Description
 
 Please include a summary of the change.
 
-## Type of change
+## 🧾Type of change
 
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
+- [ ] Documentation update
 - [ ] This change requires a documentation update
 
-# Acknowledgements
+# 🙌Acknowledgements
 
 - [ ] I linted the code by running `npm format`
 - [ ] The PR title follows the repo's commit conventions
+
+#### Skip if minor change:
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
