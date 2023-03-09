@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+    pkg:
+        build:
+            context: .
+            dockerfile: Dockerfile.local
+        container_name: gateway
+        ports:
+            - "0.0.0.0:8123:8123"
+        networks:
+            - ipost-network
+
+networks:
+    ipost-network:
+        external: true

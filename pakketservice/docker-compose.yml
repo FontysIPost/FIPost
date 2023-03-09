@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+    pkg:
+        build:
+          context: .
+          dockerfile: Dockerfile.local
+        container_name: pakketservice
+        ports:
+            - "0.0.0.0:5001:5001"
+        depends_on:
+            - pakket_db
+        networks: 
+            - ipost-network
+    pakket_db:
+        image: "mcr.microsoft.com/mssql/server"
+        volumes:
+          - pakket_volume:/var/opt/mssql
+
+        environment:
+            SA_PASSWORD: "Your_password123"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1433"
+            - "1001:1433"
+        networks: 
+          - ipost-network
+
+volumes:
+  pakket_volume: 
+
+networks:
+    ipost-network:
+        external: true

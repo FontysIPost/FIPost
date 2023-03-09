@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PakketService", "PakketService.csproj", "{9A5E4125-8096-4D10-814F-3547D143F1EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PakketService.Test", "PakketService.Test\PakketService.Test.csproj", "{0D57249A-5DD1-4EA9-95E1-14C70EB306F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A5E4125-8096-4D10-814F-3547D143F1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5E4125-8096-4D10-814F-3547D143F1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5E4125-8096-4D10-814F-3547D143F1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5E4125-8096-4D10-814F-3547D143F1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D57249A-5DD1-4EA9-95E1-14C70EB306F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D57249A-5DD1-4EA9-95E1-14C70EB306F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D57249A-5DD1-4EA9-95E1-14C70EB306F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D57249A-5DD1-4EA9-95E1-14C70EB306F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A6445A5-54E9-473C-A8AC-361346DA8A0B}
+	EndGlobalSection
+EndGlobal
