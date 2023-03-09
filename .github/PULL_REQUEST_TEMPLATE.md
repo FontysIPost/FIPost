@@ -1,6 +1,6 @@
 # 📬Description
 
-Please include a summary of the change.
+<!-- A clear and detailed description of the changes, referencing issues if applicable -->
 
 ## 🧾Type of change
 
