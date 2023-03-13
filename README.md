@@ -3,7 +3,7 @@
 <h3 align="middle">
 <a href="https://github.com/FontysIPost/FIPost">Wiki</a>
 <a>•</a>
-<a href="https://github.com/FontysIPost/FIPost/CONTRIBUTING.md">Contributing</a>
+<a href="https://github.com/FontysIPost/FIPost/blob/dev/.github/CONTRIBUTING.md">Contributing</a>
 <a>•</a>
 <a href="https://github.com/FontysIPost/FIPost/CONTACT.md">Contact</a>
 </h3>
@@ -62,7 +62,7 @@ Because this project is larger than most and should end up in production,
 it is important that everything is well documented. Even though the project will be managed by PT groups,
 every bit of help is appreciated and everyone who is willing to help out is welcome.
 
-Check [CONTRIBUTING](https://github.com/FIPost/FIPost/CONTRIBUTING.md) and [WIKI](https://github.com/FontysIPost/FIPost) for information.
+Check [CONTRIBUTING](https://github.com/FontysIPost/FIPost/blob/dev/.github/CONTRIBUTING.md) and [WIKI](https://github.com/FontysIPost/FIPost) for information.
 
 
 ## ✉️ Contact Us
