@@ -36,9 +36,9 @@ s3 > s6 > year pause > s6 team (current)
 
 ### 📐Stack
 - **Node version:** ??
-- **NPM version:** ??
-- **Frontend:** VueJS - HTML/SCSS/JavaScript and TypeScript
-- **Backend:** .NET Core 3.1 C#
+- **NPM version:** 9.6.1
+- **Frontend:** [VueJS](https://vuejs.org/guide/introduction.html) - HTML/[SCSS](https://sass-lang.com/documentation/syntax)/JavaScript and [TypeScript](https://www.typescriptlang.org/docs/)
+- **Backend:** [.NET Core 3.1](https://download.visualstudio.microsoft.com/download/pr/b70ad520-0e60-43f5-aee2-d3965094a40d/667c122b3736dcbfa1beff08092dbfc3/dotnet-sdk-3.1.426-win-x64.exe)
 
 ### 📁 Structure and services
 - [./ui/](https://github.com/FontysIPost/FIPost/tree/master/ui) Frontend UI of Fontys Internal Post system
@@ -53,6 +53,27 @@ s3 > s6 > year pause > s6 team (current)
 Clone the repository:
 ```
 git clone --recursive https://github.com/FontysIPost/FIPost.git
+```
+Navigate to `./ui` folder and install dependencies:
+```
+npm i
+```
+Run the frontend UI and open `http://localhost:8080/` when ready:
+```
+npm run serve
+```
+Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice` and `./personeel-service` and put your credentials:
+```json
+{
+  "ConnectionString": "Server=;Database=;User Id=;Password=;",
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
 ```
 
 ## 🤝 Credits & Collaboration
