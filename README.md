@@ -35,8 +35,8 @@ s3 > s6 > year pause > s6 team (current)
 ## ⚒️ Development
 
 ### 📐Stack
-- **Node version:** ??
-- **NPM version:** 9.6.1
+- **Node version:** 14.15.5
+- **NPM version:** 6.14.11
 - **Frontend:** [VueJS](https://vuejs.org/guide/introduction.html) - HTML/[SCSS](https://sass-lang.com/documentation/syntax)/JavaScript and [TypeScript](https://www.typescriptlang.org/docs/)
 - **Backend:** [.NET Core 3.1](https://download.visualstudio.microsoft.com/download/pr/b70ad520-0e60-43f5-aee2-d3965094a40d/667c122b3736dcbfa1beff08092dbfc3/dotnet-sdk-3.1.426-win-x64.exe)
 
@@ -51,15 +51,17 @@ s3 > s6 > year pause > s6 team (current)
 
 ### 🏁 Getting started:
 Clone the repository:
-```
+```sh
 git clone --recursive https://github.com/FontysIPost/FIPost.git
 ```
 Navigate to `./ui` folder and install dependencies:
-```
+```sh
+# Check which node you're using: node -v
+# To switch node version: nvm use v14.15.5
 npm i
 ```
 Run the frontend UI and open `http://localhost:8080/` when ready:
-```
+```sh
 npm run serve
 ```
 Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice` and `./personeel-service` and put your credentials:
@@ -75,6 +77,10 @@ Create a `MSSQL` Database and navigate to three `appsettings.Development.json` i
   }
 }
 ```
+Run all the following services, `personeel-service: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
+
+In order to use the functionality in the application, you have to put your login info into your database table Person. Then you can access the dashboard.
+
 
 ## 🤝 Credits & Collaboration
 
