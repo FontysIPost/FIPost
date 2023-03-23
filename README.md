@@ -60,6 +60,12 @@ Navigate to `./ui` folder and install dependencies:
 # To switch node version: nvm use v14.15.5
 npm i
 ```
+Copy `.env.example` and past it as `.env` and populate these ports
+```dotenv
+VUE_APP_API_GATEWAY=https://Localhost:44311
+VUE_APP_URL=Localhost:8080
+```
+
 Run the frontend UI and open `http://localhost:8080/` when ready:
 ```sh
 npm run serve
