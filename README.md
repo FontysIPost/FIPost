@@ -1,3 +1,5 @@
+[![SonarCloud analysis](https://github.com/FontysIPost/FIPost/actions/workflows/sonarcloud-scanner.yml/badge.svg)](https://github.com/FontysIPost/FIPost/actions/workflows/sonarcloud-scanner.yml)
+
 <img align="right" width="30%" src="./resources/logo.png"></img>
 
 <h3 align="middle">
