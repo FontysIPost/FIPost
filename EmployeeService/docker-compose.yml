@@ -1,15 +1,15 @@
 ﻿version: "3.7"
 services:
-    pkg:
-        build:
-          context: .
-          dockerfile: Dockerfile.local
-        container_name: personeel-service
-        ports:
-            - "0.0.0.0:5003:5003"
-        networks: 
-            - ipost-network
+  pkg:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: employee-service
+    ports:
+      - "0.0.0.0:5003:5003"
+    networks:
+      - ipost-network
 
 networks:
-    ipost-network:
-        external: true
+  ipost-network:
+    external: true

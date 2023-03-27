@@ -1,18 +1,15 @@
-﻿using personeel_service.Models;
-using personeel_service.Models.DTO_s;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using EmployeeService.Models.DTO_s;
 
-namespace personeel_service.Services
+namespace EmployeeService.Services;
+
+public interface IPersonService
 {
-    public interface IPersonService
-    {
-        Task<List<PersonResponse>> GetAllAsync();
-        // List<Person> GetAll();
-        // Person GetById(string id);
-        Task<PersonResponse> GetByIdAsync(string id);
-        Task<PersonResponse> GetSingleByFontysId(string fontysId);
-    }
+    Task<List<PersonResponse>> GetAllAsync();
+
+    // List<Person> GetAll();
+    // Person GetById(string id);
+    Task<PersonResponse> GetByIdAsync(string id);
+    Task<PersonResponse> GetSingleByFontysId(string fontysId);
 }

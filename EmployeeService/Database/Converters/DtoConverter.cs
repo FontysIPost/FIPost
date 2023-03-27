@@ -1,50 +1,38 @@
-﻿using personeel_service.Database.Converters;
-using personeel_service.Database.DTO_s;
-using personeel_service.Models;
-using personeel_service.Models.DTO_s;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using EmployeeService.Models;
+using EmployeeService.Models.DTO_s;
 
-namespace personeel_service.Database.Converters
+namespace EmployeeService.Database.Converters;
+
+public class DtoConverter : IDtoConverter<Person, PersonRequest, PersonResponse>
 {
-    public class DtoConverter : IDtoConverter<Person, PersonRequest, PersonResponse>
+    public Person DtoToModel(PersonRequest dto)
     {
-        public Person DtoToModel(PersonRequest dto)
+        return new Person
         {
+            Id = dto.Id,
+            Name = dto.Name,
+            Email = dto.Email
+        };
+    }
 
-            return new Person
-            {
-                Id = dto.Id,
-                Name = dto.Name,
-                Email = dto.Email
-            };
-
-
-        }
-        public PersonResponse ModelToDto(Person person)
+    public PersonResponse ModelToDto(Person person)
+    {
+        return new PersonResponse
         {
-            return new PersonResponse
-            {
-                Id = person.Id,
-                Name = person.Name,
-                Email = person.Email,
-                FontysId = person.FontysId
-            };
-        }
+            Id = person.Id,
+            Name = person.Name,
+            Email = person.Email,
+            FontysId = person.FontysId
+        };
+    }
 
-        public List<PersonResponse> ModelToDto(List<Person> persons)
-        {
-            List<PersonResponse> responseDtos = new List<PersonResponse>();
+    public List<PersonResponse> ModelToDto(List<Person> persons)
+    {
+        var responseDtos = new List<PersonResponse>();
 
-            foreach (Person pkg in persons)
-            {
-                responseDtos.Add(ModelToDto(pkg));
-            }
+        foreach (var pkg in persons) responseDtos.Add(ModelToDto(pkg));
 
-            return responseDtos;
-        }
-
+        return responseDtos;
     }
 }

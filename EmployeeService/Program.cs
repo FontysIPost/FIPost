@@ -1,3 +1,9 @@
+using EmployeeService.Database.Contexts;
+using EmployeeService.Database.Converters;
+using EmployeeService.Models;
+using EmployeeService.Models.DTO_s;
+using EmployeeService.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "_myAllowSpecificOrigins",
+    options.AddPolicy("_myAllowSpecificOrigins",
         builder =>
         {
             builder
@@ -31,10 +37,7 @@ builder.Services.AddScoped<IDtoConverter<Person, PersonRequest, PersonResponse>,
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
+if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
 
 app.UseCors("_myAllowSpecificOrigins");
 
@@ -47,10 +50,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Enable middleware to serve generated Swagger as a JSON endpoint.
-app.UseSwagger(c =>
-{
-    c.SerializeAsV2 = true;
-});
+app.UseSwagger(c => { c.SerializeAsV2 = true; });
 
 // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
 // specifying the Swagger JSON endpoint.

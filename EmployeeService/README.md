@@ -1,17 +1,18 @@
 ![ipost-logo](https://github.com/FIPost/docs/blob/master/assets/logo-name.png?raw=true)
 <h3 align="middle">
-  <a href="https://github.com/FIPost/docs">Documentation</a>
-  <a>•</a>
-  <a href="https://github.com/FIPost/docs/blob/master/CONTRIBUTING.md">Contributing</a>
-  <a>•</a>
-  <a href="https://github.com/FIPost/docs/blob/master/CONTACT.md">Contact</a>
+<a href="https://github.com/FIPost/docs">Documentation</a>
+<a>•</a>
+<a href="https://github.com/FIPost/docs/blob/master/CONTRIBUTING.md">Contributing</a>
+<a>•</a>
+<a href="https://github.com/FIPost/docs/blob/master/CONTACT.md">Contact</a>
 </h3>
 
-# personeel-service
+# Employee Service
 
-.NET Core 3.1 API service for Fontys Internal Packages.
+.NET Core 6 API service for Fontys Internal Packages.
 
 ## Getting Started with Docker
+
 ```zsh
 docker-compose up --build
 ```

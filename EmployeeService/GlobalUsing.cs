@@ -1,12 +1,7 @@
 ﻿// For Program.cs
+
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
-global using personeel_service.Database.Contexts;
-global using personeel_service.Database.Converters;
-global using personeel_service.Database.DTO_s;
-global using personeel_service.Models;
-global using personeel_service.Models.DTO_s;
-global using personeel_service.Services;

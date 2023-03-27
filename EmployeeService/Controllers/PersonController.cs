@@ -1,83 +1,75 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using personeel_service.Database.Contexts;
-using personeel_service.Helpers;
-using personeel_service.Models;
-using personeel_service.Models.DTO_s;
-using personeel_service.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using EmployeeService.Helpers;
+using EmployeeService.Models.DTO_s;
+using EmployeeService.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace personeel_service.Controllers
+namespace EmployeeService.Controllers;
+
+[Route("api/persons")]
+[ApiController]
+public class PersonController : Controller
 {
-    [Route("api/persons")]
-    [ApiController]
-    public class PersonController : Controller
+    private readonly IPersonService _service;
+
+    public PersonController(IPersonService service)
     {
-        private readonly IPersonService _service;
+        _service = service;
+    }
 
-        public PersonController(IPersonService service)
+    // GET: api/Persons
+    //[HttpGet]
+    /*  public ActionResult<IEnumerable<Person>> GetPerson()
+      {
+          return Ok(_service.GetAll());
+      }*/
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        try
         {
-            _service = service;
+            return Ok(await _service.GetAllAsync());
         }
-        
-        // GET: api/Persons
-        //[HttpGet]
-        /*  public ActionResult<IEnumerable<Person>> GetPerson()
-          {
-              return Ok(_service.GetAll());
-          }*/
-        
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        catch (NotFoundException e)
         {
-            try
-            {
-                return Ok(await _service.GetAllAsync());
-
-            }
-            catch (NotFoundException e)
-            {
-
-                return NotFound(e.Message);
-            }
+            return NotFound(e.Message);
         }
+    }
 
-        // GET: api/Persons/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PersonResponse>> GetPerson(string id)
+    // GET: api/Persons/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<PersonResponse>> GetPerson(string id)
+    {
+        try
         {
-            try
-            {
-                return Ok(await _service.GetByIdAsync(id));
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            return Ok(await _service.GetByIdAsync(id));
         }
-
-        // GET: api/Persons
-        [HttpGet]
-        [Route("health")]
-        public ActionResult Health()
+        catch (NotFoundException e)
         {
-            return Ok();
+            return NotFound(e.Message);
         }
+    }
 
-        [HttpGet]
-        [Route("getbyfontysid/{id}")]
-        public async Task<ActionResult<PersonResponse>> GetByFontysId(string id)
+    // GET: api/Persons
+    [HttpGet]
+    [Route("health")]
+    public ActionResult Health()
+    {
+        return Ok();
+    }
+
+    [HttpGet]
+    [Route("getbyfontysid/{id}")]
+    public async Task<ActionResult<PersonResponse>> GetByFontysId(string id)
+    {
+        try
         {
-            try
-            {
-                return Ok(await _service.GetSingleByFontysId(id));
-            }
-            catch (NotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            return Ok(await _service.GetSingleByFontysId(id));
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
         }
     }
 }
