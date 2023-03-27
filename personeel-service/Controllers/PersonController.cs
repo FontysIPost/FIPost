@@ -15,27 +15,20 @@ namespace personeel_service.Controllers
     [ApiController]
     public class PersonController : Controller
     {
-
         private readonly IPersonService _service;
-
-        /* public PersonController(IPersonService service)
-         {
-             _service = service;
-         }*/
-
 
         public PersonController(IPersonService service)
         {
             _service = service;
         }
-
-
+        
         // GET: api/Persons
         //[HttpGet]
         /*  public ActionResult<IEnumerable<Person>> GetPerson()
           {
               return Ok(_service.GetAll());
           }*/
+        
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -50,9 +43,6 @@ namespace personeel_service.Controllers
                 return NotFound(e.Message);
             }
         }
-
-
-
 
         // GET: api/Persons/5
         [HttpGet("{id}")]

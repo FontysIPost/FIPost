@@ -1,17 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using personeel_service.Database.Contexts;
-using personeel_service.Database.Converters;
-using personeel_service.Database.DTO_s;
-using personeel_service.Models;
-using personeel_service.Models.DTO_s;
-using personeel_service.Services;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
