@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "LocatieService": {
+    "LocationService": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api",

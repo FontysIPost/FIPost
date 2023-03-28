@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>LocatieService</RootNamespace>
+    <RootNamespace>LocationService</RootNamespace>
     <UserSecretsId>e66b2681-2382-45f2-852e-2b927035cedd</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
