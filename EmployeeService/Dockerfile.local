@@ -1,0 +1,22 @@
+﻿FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+WORKDIR /app
+EXPOSE 5003
+
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+ENV ASPNETCORE_ENVIRONMENT="Development"
+ENV ENVIRONMENT="Development"
+
+WORKDIR /src
+COPY ["EmployeeService.csproj", "."]
+RUN dotnet restore "./EmployeeService.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "EmployeeService.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "EmployeeService.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "EmployeeService.dll"]
