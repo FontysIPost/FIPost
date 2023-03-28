@@ -1,0 +1,32 @@
+﻿version: "3.9"
+services:
+    pkg:
+        build: 
+            context: .
+            dockerfile: Dockerfile.local
+        container_name: locatieservice
+        ports:
+            - "0.0.0.0:5002:5002"
+        depends_on:
+            - location_db
+        networks: 
+            - ipost-network
+    location_db:
+        image: "mcr.microsoft.com/mssql/server"
+        volumes:
+          - location_volume:/var/opt/mssql
+
+        environment:
+            SA_PASSWORD: "Your_password123"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1433"
+            - "1002:1433"
+        networks: 
+            - ipost-network
+volumes:
+  location_volume:
+
+networks:
+    ipost-network:
+        external: true
