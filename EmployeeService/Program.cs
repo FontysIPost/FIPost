@@ -1,16 +1,6 @@
-using EmployeeService.Database.Contexts;
-using EmployeeService.Database.Converters;
-using EmployeeService.Models;
-using EmployeeService.Models.DTO_s;
-using EmployeeService.Services;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connection = builder.Configuration.GetValue<string>("ConnectionString");
-builder.Services.AddDbContextPool<PersonServiceContext>(
-    options => options.UseSqlServer(connection));
-
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
@@ -27,6 +17,11 @@ builder.Services.AddCors(options =>
                 .AllowAnyOrigin();
         });
 });
+
+// Add context
+var connection = builder.Configuration.GetValue<string>("ConnectionString");
+builder.Services.AddDbContextPool<PersonServiceContext>(
+    options => options.UseSqlServer(connection));
 
 // Inject services.
 builder.Services.AddTransient<IPersonService, PersonService>();
