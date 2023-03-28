@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using personeel_service.Database.Contexts;
 using personeel_service.Database.Converters;
@@ -12,12 +13,16 @@ using personeel_service.Database.DTO_s;
 using personeel_service.Models;
 using personeel_service.Models.DTO_s;
 using personeel_service.Services;
+using System;
+using System.Text;
 
 namespace personeel_service
 {
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private const string SECRET_KEY = "this is my custom Secret key for authnetication";
+        public static readonly SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
 
         public Startup(IConfiguration configuration)
         {
@@ -52,6 +57,24 @@ namespace personeel_service
                       });
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
+            .AddJwtBearer("JwtBearer", jwtOptions =>
+            {
+                jwtOptions.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = SIGNING_KEY,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(5)
+                };
+            });
+
             // Inject services.
             services.AddTransient<IPersonService, PersonService>();
 
@@ -75,6 +98,7 @@ namespace personeel_service
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

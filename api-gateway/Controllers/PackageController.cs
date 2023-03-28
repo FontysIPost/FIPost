@@ -36,9 +36,9 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ICollection<PackageResponseModel>>> Get()
+        public async Task<ActionResult<ICollection<PackageResponseModel>>> Get([FromHeader] string Authorization)
         {
-            IFlurlResponse packageResponse = await $"{Constants.PackageApiUrl}/api/packages".GetAsync();
+            IFlurlResponse packageResponse = await $"{Constants.PackageApiUrl}/api/packages".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
             //var errPackageResponse = packageResponse.GetResponse("Er zijn nog geen pakketten");
             if (packageResponse.StatusCode != 200)
             {
@@ -47,7 +47,7 @@ namespace api_gateway.Controllers
             }
 
             ICollection<PackageServiceModel> allPackageServiceModels = await packageResponse.GetJsonAsync<ICollection<PackageServiceModel>>();
-            ICollection<PackageResponseModel> allPackages = ServiceToResponseModelConverter.ConvertPackages(allPackageServiceModels, await GetAllPersons(), await GetAllRooms());
+            ICollection<PackageResponseModel> allPackages = ServiceToResponseModelConverter.ConvertPackages(allPackageServiceModels, await GetAllPersons(Authorization), await GetAllRooms(Authorization));
 
             return Ok(allPackages);
 
@@ -58,9 +58,9 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PackageResponseModel>> GetById(Guid id)
+        public async Task<ActionResult<PackageResponseModel>> GetById(Guid id, [FromHeader] string Authorization)
         {
-            IFlurlResponse packageResponse = await $"{Constants.PackageApiUrl}/api/packages/{id}".GetAsync();
+            IFlurlResponse packageResponse = await $"{Constants.PackageApiUrl}/api/packages/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
 
             var errPackageResponse = packageResponse.GetResponse();
 
@@ -71,7 +71,7 @@ namespace api_gateway.Controllers
             PackageServiceModel packageModel = await packageResponse.GetJsonAsync<PackageServiceModel>();
 
 
-            PackageResponseModel responseModel = ServiceToResponseModelConverter.ConvertPackage(packageModel, await GetAllPersons(), await GetAllRooms());
+            PackageResponseModel responseModel = ServiceToResponseModelConverter.ConvertPackage(packageModel, await GetAllPersons(Authorization), await GetAllRooms(Authorization));
             return Ok(responseModel);
 
         }
@@ -82,22 +82,22 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PackageResponseModel>> PostPackage(PackageRequestModel request)
+        public async Task<ActionResult<PackageResponseModel>> PostPackage(PackageRequestModel request, [FromHeader] string Authorization)
         {
-            ObjectResult personResponse = await PersonExists(request.ReceiverId);
+            ObjectResult personResponse = await PersonExists(request.ReceiverId, Authorization);
             if (personResponse.StatusCode != 200)
             {
                 return personResponse;
             }
 
-            ObjectResult collectionPointResponse = await CollectionPointExists(request.CollectionPointId);
+            ObjectResult collectionPointResponse = await CollectionPointExists(request.CollectionPointId, Authorization);
             if (collectionPointResponse.StatusCode != 200)
             {
                 return collectionPointResponse;
             }
 
             //Post package
-            IFlurlResponse flurlPostResponse = await $"{Constants.PackageApiUrl}/api/packages".PostJsonAsync(request);
+            IFlurlResponse flurlPostResponse = await $"{Constants.PackageApiUrl}/api/packages".WithHeaders(new { Accept = "text/plain", Authorization }).PostJsonAsync(request);
             var postResponse = flurlPostResponse.GetResponse();
 
             if (postResponse.StatusCode != HttpStatusCode.OK)
@@ -106,7 +106,7 @@ namespace api_gateway.Controllers
             }
 
             PackageServiceModel model = await flurlPostResponse.GetJsonAsync<PackageServiceModel>();
-            PackageResponseModel responseModel = ServiceToResponseModelConverter.ConvertPackage(model, await GetAllPersons(), await GetAllRooms());
+            PackageResponseModel responseModel = ServiceToResponseModelConverter.ConvertPackage(model, await GetAllPersons(Authorization), await GetAllRooms(Authorization));
 
             //send registration mail
             // await "https://mailservice20210603092014.azurewebsites.net/api/TrackAndTraceMail?code=bTMCXQQGWaQycYLfbP/Vq749V03PPkSbmwRyfQlBXlVQq9WZyR4U7Q==".PostJsonAsync(responseModel);
@@ -118,22 +118,22 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<TicketResponseModel>> PostTicket(TicketRequestModel request)
+        public async Task<ActionResult<TicketResponseModel>> PostTicket(TicketRequestModel request, [FromHeader] string Authorization)
         {
-            ObjectResult personResponse = await PersonExists(request.CompletedByPersonId);
+            ObjectResult personResponse = await PersonExists(request.CompletedByPersonId, Authorization);
             if (personResponse.StatusCode != 200)
             {
                 return personResponse;
             }
 
-            ObjectResult collectionPointResponse = await CollectionPointExists(request.LocationId);
+            ObjectResult collectionPointResponse = await CollectionPointExists(request.LocationId, Authorization);
             if (collectionPointResponse.StatusCode != 200)
             {
                 return collectionPointResponse;
             }
 
             //Post ticket
-            IFlurlResponse flurlPostResponse = await $"{Constants.PackageApiUrl}/api/tickets".PostJsonAsync(request);
+            IFlurlResponse flurlPostResponse = await $"{Constants.PackageApiUrl}/api/tickets".WithHeaders(new { Accept = "text/plain", Authorization }).PostJsonAsync(request);
             var postResponse = flurlPostResponse.GetResponse();
 
             if (postResponse.StatusCode != HttpStatusCode.OK)
@@ -145,10 +145,10 @@ namespace api_gateway.Controllers
             TicketResponseModel responseModel = ServiceToResponseModelConverter.ConvertTicket(model);
 
             //check if package is finished and then send arrival email
-            IFlurlResponse flurlPackageResponse = await $"{Constants.PackageApiUrl}/api/packages/{request.PackageId}".GetAsync();
+            IFlurlResponse flurlPackageResponse = await $"{Constants.PackageApiUrl}/api/packages/{request.PackageId}".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
 
             PackageServiceModel pkgService = await flurlPackageResponse.GetJsonAsync<PackageServiceModel>();
-            PackageResponseModel pkg = ServiceToResponseModelConverter.ConvertPackage(pkgService, await GetAllPersons(), await GetAllRooms());
+            PackageResponseModel pkg = ServiceToResponseModelConverter.ConvertPackage(pkgService, await GetAllPersons(Authorization), await GetAllRooms(Authorization));
 
             Console.WriteLine("package route finished is " + pkg.RouteFinished);
 
@@ -169,21 +169,21 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PackageResponseModel>> PutPackage(Guid id, PackageRequestModel request)
+        public async Task<ActionResult<PackageResponseModel>> PutPackage(Guid id, PackageRequestModel request, [FromHeader] string Authorization)
         {
-            ObjectResult personResponse = await PersonExists(request.ReceiverId);
+            ObjectResult personResponse = await PersonExists(request.ReceiverId, Authorization);
             if (personResponse.StatusCode != 200)
             {
                 return personResponse;
             }
 
-            ObjectResult collectionPointResponse = await CollectionPointExists(request.CollectionPointId);
+            ObjectResult collectionPointResponse = await CollectionPointExists(request.CollectionPointId, Authorization);
             if (collectionPointResponse.StatusCode != 200)
             {
                 return collectionPointResponse;
             }
 
-            IFlurlResponse flurlPutResponse = await $"{Constants.PackageApiUrl}/api/packages/{id}".PutJsonAsync(request);
+            IFlurlResponse flurlPutResponse = await $"{Constants.PackageApiUrl}/api/packages/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).PutJsonAsync(request);
             var putResponse = flurlPutResponse.GetResponse();
 
             if (putResponse.StatusCode != HttpStatusCode.OK)
@@ -203,9 +203,9 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id, [FromHeader] string Authorization)
         {
-            IFlurlResponse response = await $"{Constants.PackageApiUrl}/api/packages/{id}".DeleteAsync();
+            IFlurlResponse response = await $"{Constants.PackageApiUrl}/api/packages/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).DeleteAsync();
             var deleteResponse = response.GetResponse("Het meegegeven pakket bestaat niet");
 
             if (deleteResponse.StatusCode != HttpStatusCode.NoContent) // Service returns 204 on delete.
@@ -218,9 +218,9 @@ namespace api_gateway.Controllers
         #endregion
 
         #region Helper methods.
-        private async Task<ObjectResult> PersonExists(string id)
+        private async Task<ObjectResult> PersonExists(string id, string Authorization)
         {
-            IFlurlResponse flurlPersonResponse = await $"{Constants.PersonApiUrl}/api/persons/{id}".GetAsync();
+            IFlurlResponse flurlPersonResponse = await $"{Constants.PersonApiUrl}/api/persons/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
             var personResponse = flurlPersonResponse.GetResponse("De meegegeven ontvanger bestaat niet");
 
             if (personResponse.StatusCode != HttpStatusCode.OK)
@@ -231,9 +231,9 @@ namespace api_gateway.Controllers
             return new ObjectResult(personResponse.Message) { StatusCode = (int)personResponse.StatusCode };
         }
 
-        private async Task<ObjectResult> CollectionPointExists(Guid id)
+        private async Task<ObjectResult> CollectionPointExists(Guid id, string Authorization)
         {
-            IFlurlResponse flurlCollectionPointResponse = await $"{Constants.LocationApiUrl}/api/rooms/{id}".GetAsync();
+            IFlurlResponse flurlCollectionPointResponse = await $"{Constants.LocationApiUrl}/api/rooms/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
             var collectionPointResponse = flurlCollectionPointResponse.GetResponse("De meegegeven ruimte bestaat niet");
 
             if (collectionPointResponse.StatusCode != HttpStatusCode.OK)
@@ -244,9 +244,9 @@ namespace api_gateway.Controllers
             return new ObjectResult(collectionPointResponse.Message) { StatusCode = (int)collectionPointResponse.StatusCode };
         }
 
-        private async Task<ICollection<Room>> GetAllRooms()
+        private async Task<ICollection<Room>> GetAllRooms(string Authorization)
         {
-            IFlurlResponse locationResponse = await $"{Constants.LocationApiUrl}/api/rooms".GetAsync();
+            IFlurlResponse locationResponse = await $"{Constants.LocationApiUrl}/api/rooms".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
             var errLocationResponse = locationResponse.GetResponse();
             ICollection<Room> allRooms = null;
 
@@ -257,9 +257,9 @@ namespace api_gateway.Controllers
             return allRooms;
         }
 
-        private async Task<ICollection<PersonServiceModel>> GetAllPersons()
+        private async Task<ICollection<PersonServiceModel>> GetAllPersons(string Authorization)
         {
-            IFlurlResponse personResponse = await $"{Constants.PersonApiUrl}/api/persons".GetAsync();
+            IFlurlResponse personResponse = await $"{Constants.PersonApiUrl}/api/persons".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
             var errPersonResponse = personResponse.GetResponse();
             ICollection<PersonServiceModel> allPersonServiceModels = null;
 

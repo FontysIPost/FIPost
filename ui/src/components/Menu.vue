@@ -18,7 +18,6 @@
       labelText="Locaties"
       :source="getImgUrl('map.png')"
     />
-    
   </div>
 </template>
 
@@ -56,7 +55,7 @@ const Menu = defineComponent({
     locationClicked(): void {
       this.$router.push("/locaties");
     },
-    
+
   },
 });
 export default Menu;

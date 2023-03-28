@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using personeel_service.Database.Contexts;
 using personeel_service.Helpers;
 using personeel_service.Models;
@@ -13,6 +14,7 @@ namespace personeel_service.Controllers
 {
     [Route("api/persons")]
     [ApiController]
+    [Authorize]
     public class PersonController : Controller
     {
 
@@ -66,14 +68,6 @@ namespace personeel_service.Controllers
             {
                 return NotFound(e.Message);
             }
-        }
-
-        // GET: api/Persons
-        [HttpGet]
-        [Route("health")]
-        public ActionResult Health()
-        {
-            return Ok();
         }
 
         [HttpGet]

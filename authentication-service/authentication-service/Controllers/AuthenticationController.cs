@@ -3,6 +3,7 @@ using authentication_service.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -55,14 +56,22 @@ namespace authentication_service.Controllers
             string[] token = Authorization.Split(' ');
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token[1]);
+            string email = "";
+            int role = 0;
             foreach (Claim c in jwtSecurityToken.Claims)
             {
                 if (c.Type == "email")
                 {
-                    return c.Value;
+                    email = c.Value;
+                }
+                else if (ClaimTypes.Role == c.Type)
+                {
+                    role = Convert.ToInt32(c.Value);
                 }
             }
-            return "";
+            UserResponse userResponse = new UserResponse(email, role);
+            string jSonObject = JsonConvert.SerializeObject(userResponse);
+            return jSonObject;
         }
 
         [HttpGet]

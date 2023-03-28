@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-</template>   
+</template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
@@ -159,7 +159,7 @@ export default class AddCity extends Vue {
       this.isLoading = true;
       console.log("getcity" + this.cityId);
       cityService.getById(this.cityId).then((res) => {
-        
+
         this.city = new CityRequest(res.name);
         this.isLoading = false;
       });

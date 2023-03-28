@@ -10,12 +10,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
 
 namespace LocatieService
 {
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private const string SECRET_KEY = "this is my custom Secret key for authnetication";
+        public static readonly SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,6 +44,24 @@ namespace LocatieService
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSwaggerGen();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
+             .AddJwtBearer("JwtBearer", jwtOptions =>
+             {
+                 jwtOptions.TokenValidationParameters = new TokenValidationParameters()
+                 {
+                     IssuerSigningKey = SIGNING_KEY,
+                     ValidateIssuer = false,
+                     ValidateAudience = false,
+                     ValidateIssuerSigningKey = false,
+                     ValidateLifetime = true,
+                     ClockSkew = TimeSpan.FromMinutes(5)
+                 };
+             });
 
             services.AddCors(options =>
             {
@@ -79,6 +103,7 @@ namespace LocatieService
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
