@@ -63,6 +63,9 @@
                 <div class="container container-header modern-pink">
                   Laatste stap
                 </div>
+
+                <Signature></Signature>
+
                 <!--
                 <CBSearchSuggestions
                   :options="personOptions"
@@ -126,6 +129,7 @@ import LoadingIcon from "@/components/standardUi/LoadingIcon.vue";
 import { StreamBarcodeReader } from "vue-barcode-reader";
 import { ImageBarcodeReader } from "vue-barcode-reader";
 import InputField from "@/components/standardUi/InputField.vue";
+import  Signature  from "@/components/BarCodeScanner/Signature.vue";
 // Types.
 import Person from "@/classes/Person";
 import Room from "@/classes/Room";
@@ -150,6 +154,7 @@ import { Prop } from "vue-property-decorator";
     TicketComp,
     StreamBarcodeReader,
     ImageBarcodeReader,
+    Signature,
     InputField
   },
 })
