@@ -2,12 +2,14 @@
 using EmployeeService.Helpers;
 using EmployeeService.Models.DTO_s;
 using EmployeeService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeService.Controllers;
 
 [Route("api/persons")]
 [ApiController]
+[Authorize]
 public class PersonController : Controller
 {
     private readonly IPersonService _service;
@@ -49,14 +51,6 @@ public class PersonController : Controller
         {
             return NotFound(e.Message);
         }
-    }
-
-    // GET: api/Persons
-    [HttpGet]
-    [Route("health")]
-    public ActionResult Health()
-    {
-        return Ok();
     }
 
     [HttpGet]

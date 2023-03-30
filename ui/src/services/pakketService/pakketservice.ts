@@ -28,7 +28,7 @@ export default class PakketService {
     return response.data;
   }
 
-  public async createTicket(request: TicketRequest ) : Promise<Package> {
+  public async createTicket(request: TicketRequest) : Promise<Package> {
     const config = {
       'headers': {'Authorization': 'Bearer ' + localStorage.getItem('token')}
     }

@@ -1,8 +1,15 @@
+using System;
+using System.Text;
 using EmployeeService.Database.Contexts;
 using EmployeeService.Database.Converters;
 using EmployeeService.Models;
 using EmployeeService.Models.DTO_s;
 using EmployeeService.Services;
+using Microsoft.IdentityModel.Tokens;
+
+const string SECRET_KEY = "this is my custom Secret key for authnetication";
+SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +21,8 @@ builder.Services.AddDbContextPool<PersonServiceContext>(
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddCors(options =>
 {
@@ -27,6 +36,23 @@ builder.Services.AddCors(options =>
                 .AllowAnyOrigin();
         });
 });
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = "JwtBearer";
+        options.DefaultChallengeScheme = "JwtBearer";
+    }).AddJwtBearer("JwtBearer", jwtOptions =>
+    {
+        jwtOptions.TokenValidationParameters = new TokenValidationParameters()
+        {
+            IssuerSigningKey = SIGNING_KEY,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(5)
+        };
+    });
 
 // Inject services.
 builder.Services.AddTransient<IPersonService, PersonService>();
@@ -44,6 +70,8 @@ app.UseCors("_myAllowSpecificOrigins");
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

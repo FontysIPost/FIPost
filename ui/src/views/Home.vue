@@ -10,6 +10,12 @@
       <hr />
        <div class="flex-container">
          <div class="email-inline">
+           <div v-if="role === 0">
+             Administrator:
+           </div>
+           <div v-else>
+             Medewerker:
+           </div>
            {{email}}
          </div>
          <div>
@@ -30,16 +36,13 @@ import RegisterSvg from "@/components/svg/RegisterSvg.vue";
 import ScanSvg from "@/components/svg/ScanSvg.vue";
 import SearchSvg from "@/components/svg/SearchSvg.vue";
 import axios from "axios";
-
-
-
 const Home = defineComponent({
   components: {
     Menu
   },
   data() {
     return {
-      email: String
+      email: String,
     };
   },
   methods: {
@@ -67,7 +70,7 @@ const Home = defineComponent({
     }
     axios.get('https://localhost:44369/api/Authentication/auth', config )
         .then(response => {
-          this.email = response.data;
+          this.email = response.data.email;
         })
     .catch(err => {
       this.$router.push("/login");

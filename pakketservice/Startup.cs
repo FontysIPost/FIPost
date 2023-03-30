@@ -5,17 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using PakketService.Database.Contexts;
 using PakketService.Database.Converters;
 using PakketService.Database.Datamodels;
 using PakketService.Database.Datamodels.Dtos;
 using PakketService.Services;
+using System;
+using System.Text;
 
 namespace PakketService
 {
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private const string SECRET_KEY = "this is my custom Secret key for authnetication";
+        public static readonly SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
 
         public Startup(IConfiguration configuration)
         {
@@ -49,6 +54,24 @@ namespace PakketService
                 });
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
+             .AddJwtBearer("JwtBearer", jwtOptions =>
+             {
+                 jwtOptions.TokenValidationParameters = new TokenValidationParameters()
+                 {
+                     IssuerSigningKey = SIGNING_KEY,
+                     ValidateIssuer = false,
+                     ValidateAudience = false,
+                     ValidateIssuerSigningKey = false,
+                     ValidateLifetime = true,
+                     ClockSkew = TimeSpan.FromMinutes(5)
+                 };
+             });
+
             //Inject converter.
             services.AddScoped<IDtoConverter<Package, PackageRequest, PackageResponse>, DtoConverter>();
             services.AddScoped<IDtoConverter<Ticket, TicketRequest, TicketResponse>, TicketDtoConverter>();
@@ -74,8 +97,8 @@ namespace PakketService
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
