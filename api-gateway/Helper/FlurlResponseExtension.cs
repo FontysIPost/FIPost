@@ -24,7 +24,7 @@ namespace api_gateway.Helper
                     return new ErrorResponse(HttpStatusCode.Conflict, "Het item dat u probeert toe te voegen/updaten bestaat al");
                 case 500:
                     return new ErrorResponse(HttpStatusCode.InternalServerError, "Er ging iets mis. Probeer het later opnieuw");
-                case 401:
+                case 403:
                     return new ErrorResponse(HttpStatusCode.Unauthorized, "U bent niet geautoriseerd om deze actie uit te voeren");
                 default:
                     return new ErrorResponse(HttpStatusCode.OK, "");
