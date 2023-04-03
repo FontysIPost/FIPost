@@ -1,14 +1,5 @@
-using System;
-using System.Text;
-using EmployeeService.Database.Contexts;
-using EmployeeService.Database.Converters;
-using EmployeeService.Models;
-using EmployeeService.Models.DTO_s;
-using EmployeeService.Services;
-using Microsoft.IdentityModel.Tokens;
-
 const string SECRET_KEY = "this is my custom Secret key for authnetication";
-SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
+var SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
 
 
 var builder = WebApplication.CreateBuilder(args);
