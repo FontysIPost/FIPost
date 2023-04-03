@@ -43,6 +43,7 @@ const Home = defineComponent({
   data() {
     return {
       email: String,
+      role: Number
     };
   },
   methods: {
@@ -71,6 +72,7 @@ const Home = defineComponent({
     axios.get('https://localhost:44369/api/Authentication/auth', config )
         .then(response => {
           this.email = response.data.email;
+          this.role = response.data.role;
         })
     .catch(err => {
       this.$router.push("/login");
