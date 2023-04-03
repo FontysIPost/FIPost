@@ -2,6 +2,7 @@
 using LocatieService.Database.Datamodels;
 using LocatieService.Database.Datamodels.Dtos;
 using LocatieService.Database.Datamodels.Dtos.Responses;
+using Microsoft.AspNetCore.Authorization;
 using LocatieService.Helpers;
 using LocatieService.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -86,9 +87,10 @@ namespace LocatieService.Test
         [Test]
         public async Task GetAllBuildings_Ok()
         {
+            string authorization = "Bearer <your-auth-token>";
             serviceMock.Setup(x => x.GetAllAsync()).ReturnsAsync(buildingResponses);
             var controller = new BuildingController(serviceMock.Object);
-            var actionResult = await controller.GetAllBuildings();
+            var actionResult = await controller.GetAllBuildings(authorization);
             Assert.IsNotNull(actionResult);
             Assert.IsInstanceOf<OkObjectResult>(actionResult.Result);
             Assert.AreEqual(buildingResponses, GetObjectResultContent(actionResult));
