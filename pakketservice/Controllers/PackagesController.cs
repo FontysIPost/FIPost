@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PakketService.Database.Converters;
-using PakketService.Database.Datamodels;
-using PakketService.Database.Datamodels.Dtos;
 using PakketService.helpers;
-using PakketService.Services;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

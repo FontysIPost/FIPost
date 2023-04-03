@@ -1,17 +1,3 @@
-using System;
-using System.Text;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using PakketService.Database.Contexts;
-using PakketService.Database.Converters;
-using PakketService.Database.Datamodels;
-using PakketService.Database.Datamodels.Dtos;
-using PakketService.Services;
-
 const string SECRET_KEY = "this is my custom Secret key for authnetication";
 var SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
 
