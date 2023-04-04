@@ -22,7 +22,8 @@
     "vue-barcode-reader": "0.0.3",
     "vue-class-component": "^8.0.0-0",
     "vue-property-decorator": "latest",
-    "vue-router": "^4.0.4"
+    "vue-router": "^4.0.4",
+    "vue-signature-pad": "^3.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",
