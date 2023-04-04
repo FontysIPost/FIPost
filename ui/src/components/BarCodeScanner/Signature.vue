@@ -3,14 +3,15 @@
       <div class="container">
         <VueSignaturePad
           id="signature"
-          width="500px"
-          height="200px"
+          width="30em"
+          height="10em"
+          position="absolute"
           ref="signaturePad"
           :options="options"
         />
       </div>
       <div class="buttons">
-        <button @click="undo">Undo</button>
+        <button class="finish" @click="undo">Undo</button>
         <button @click="save">Save</button>
         <!-- <button @click="change">Change Color</button>
         <button @click="resume">Resume Color</button> -->
@@ -77,5 +78,8 @@
     gap: 8px;
     justify-content: center;
     margin-top: 8px;
+  }
+  .signaturepad{
+    
   }
   </style>

@@ -66,6 +66,12 @@
 
                 <Signature></Signature>
 
+                <InputField
+                  label="Voer FontysID in:"
+                  v-model:input="inputFontysID"
+                  @update:input="fontysIDCharacterCheck"
+                />
+               
                 <!--
                 <CBSearchSuggestions
                   :options="personOptions"
@@ -80,7 +86,7 @@
                 </CBSearchSuggestions> -->
 
 
-                    Scan de fontyspas voor checkout:
+                    <!-- Scan de fontyspas voor checkout:
                 <StreamBarcodeReader
                     @decode="onDecode"
                     @loaded="onLoaded"
@@ -88,7 +94,7 @@
                 <ImageBarcodeReader
                     @decode="onDecode"
                     @error="onError"
-                ></ImageBarcodeReader>
+                ></ImageBarcodeReader> -->
 
                 <div v-if="passcan">
                   <div v-if="completedBy.name !== '' && completedBy != null">
@@ -195,6 +201,7 @@ export default class CreateTicket extends Vue {
   private textInputId = '';
   private completedByName = '';
   private passcan = false;
+  private inputFontysID = '';
 
   private personChanged(personOption: SelectOption) {
     this.selectedPersonOption = personOption;
@@ -263,16 +270,17 @@ export default class CreateTicket extends Vue {
       await this.runValidation();
       if (this.errors.length < 1) {
         console.log(this.selectedPersonOption.id)
-            console.log(this.selectedRoomOption.id)
-            console.log(this.fPackage.id)
-            console.log(this.showPersonConfirmation)
+            //console.log(this.selectedRoomOption.id)
+            //console.log(this.fPackage.id)
+            //console.log(this.showPersonConfirmation)
             
-            console.log(this.completedBy.id)
+            //console.log(this.completedBy.id)
         await pakketService
           .createTicket({
             
             locationId: this.selectedRoomOption.id,
             packageId: this.fPackage.id,
+            //completedByPersonId: this.inputResult,
             completedByPersonId: this.selectedPersonOption.id.toString(),
             receivedByPersonId: this.showPersonConfirmation
               ? this.completedBy.id
@@ -305,10 +313,18 @@ export default class CreateTicket extends Vue {
       this.passcan = true;
     })
   }
+
+  private async fontysIDCharacterCheck(input: string){
+    if(this.inputFontysID.length == 6 ){
+      this.onDecode(this.inputFontysID)
+    }
+  }
+
   private async keydowntest(input: string) {
     console.log(input);
   }
   private async onDecode (result) {
+    console.log(result)
     this.textInputId = result;
     await personeelService
         .getByFontysId(this.textInputId)
@@ -319,6 +335,7 @@ export default class CreateTicket extends Vue {
           this.passcan = true;
         })
     console.log(result)
+
   }
 
   @Emit("new-ticket")
