@@ -1,13 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace authentication_service.Controllers
 {
@@ -15,15 +8,15 @@ namespace authentication_service.Controllers
     {
 
         private const string SECRET_KEY = "this is my custom Secret key for authnetication";
-        public static readonly SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TokenController.SECRET_KEY));
+        public static readonly SymmetricSecurityKey SIGNING_KEY = new(Encoding.UTF8.GetBytes(SECRET_KEY));
 
         public object GenerateToken(string email, string role)
         {
             var token = new JwtSecurityToken(
                 claims: new Claim[]
                 {
-                    new Claim("email", email),
-                    new Claim(ClaimTypes.Role, role)
+                    new("email", email),
+                    new(ClaimTypes.Role, role)
                 },
                 notBefore: DateTime.Now,
                 expires: DateTime.Now.AddMinutes(60),
