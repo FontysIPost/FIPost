@@ -70,7 +70,7 @@ namespace authentication_service.Controllers
             else
             {
                 _logger.LogInformation("User logged in: {0}", p.Email);
-                await LogToMicroservice($"User logged in: {p.Email}","");
+                await LogToMicroservice($"User logged in: {p.Email}", "http://localhost:5000/info");
                 return TC.GenerateToken(p.Email, Convert.ToString(person.Role));
             }
         }
