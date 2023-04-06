@@ -37,8 +37,8 @@ jobs:
     - name: Restore & build Employee Service
       run: |
         cd ./EmployeeService
-        dotnet restore .\EmployeeService.csproj
-        dotnet build --no-restore .\EmployeeService.csproj
+        dotnet restore ./EmployeeService.csproj
+        dotnet build --no-restore ./EmployeeService.csproj
 
     - name: Restore & build Authentication Service
       run: |
