@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>personeel_service.Test</RootNamespace>
+    <RootNamespace>EmployeeService.Test</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\personeel-service.csproj" />
+    <ProjectReference Include="..\EmployeeService.csproj" />
   </ItemGroup>
 
 </Project>

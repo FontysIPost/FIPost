@@ -9,28 +9,28 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="personeel-service.Test\**"/>
-        <Content Remove="personeel-service.Test\**"/>
-        <EmbeddedResource Remove="personeel-service.Test\**"/>
-        <None Remove="personeel-service.Test\**"/>
-        <Compile Remove="Startup.cs"/>
+        <Compile Remove="EmployeeService.Test\**" />
+        <Content Remove="EmployeeService.Test\**" />
+        <EmbeddedResource Remove="EmployeeService.Test\**" />
+        <None Remove="EmployeeService.Test\**" />
+        <Compile Remove="Startup.cs" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.3"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.3" />
     </ItemGroup>
 
     <ProjectExtensions>
         <VisualStudio>
-            <UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/artifacthub-repo.json"/>
+            <UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/artifacthub-repo.json" />
         </VisualStudio>
     </ProjectExtensions>
 

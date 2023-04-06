@@ -72,7 +72,7 @@ Run the frontend UI and open `http://localhost:8080/` when ready:
 ```sh
 npm run serve
 ```
-Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice` and `./personeel-service` and put your credentials:
+Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice` and `./EmployeeService` and put your credentials:
 ```json
 {
   "ConnectionString": "Server=;Database=;User Id=;Password=;",
