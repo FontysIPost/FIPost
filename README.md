@@ -42,7 +42,7 @@ s3 > s6 > year pause > s6 team (current)
 - **Frontend:** [VueJS](https://vuejs.org/guide/introduction.html) - HTML/[SCSS](https://sass-lang.com/documentation/syntax)/JavaScript and [TypeScript](https://www.typescriptlang.org/docs/)
 - **Backend:** [.NET Core 3.1](https://download.visualstudio.microsoft.com/download/pr/b70ad520-0e60-43f5-aee2-d3965094a40d/667c122b3736dcbfa1beff08092dbfc3/dotnet-sdk-3.1.426-win-x64.exe)
 
-### 📁 Structure and services
+### 📁 Structure & services
 - [./ui/](https://github.com/FontysIPost/FIPost/tree/master/ui) Frontend UI of Fontys Internal Post system
 - [./api-gateway/](https://github.com/FontysIPost/FIPost/tree/master/api-gateway) API gateway to reroute and log the system of services
 - [./authentication-service/](https://github.com/FontysIPost/FIPost/tree/master/authentication-service) Login service
