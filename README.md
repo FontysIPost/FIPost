@@ -48,7 +48,7 @@ s3 > s6 > year pause > s6 team (current)
 - [./authentication-service/](https://github.com/FontysIPost/FIPost/tree/master/authentication-service) Login service
 - [./pakketservice/](https://github.com/FIPost/tree/master/pakketservice) Post, Letter and package management
 - [./Locatie-service/](https://github.com/FontysIPost/FIPost/tree/master/locatieservice) Track and trace and location register
-- [./Personeel-service/](https://github.com/FontysIPost/FIPost/tree/master/personeel-service) Employee management for package registration
+- [./EmployeeService/](https://github.com/FontysIPost/FIPost/tree/master/personeel-service) Employee management for package registration
 
 
 ### 🏁 Getting started:
