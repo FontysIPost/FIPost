@@ -30,7 +30,7 @@ jobs:
       
     - name: Restore & build Location Service
       run: |
-        cd cd/locatie-service 
+        cd ./locatie-service 
         dotnet restore
         dotnet build --no-restore
         
