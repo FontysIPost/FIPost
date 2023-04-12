@@ -16,7 +16,7 @@ namespace Logging_Service
         public LoggingService(IConfiguration configuration)
         {
             var optionsBuilder = new DbContextOptionsBuilder<MyDbContext>();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyDbConnectionString"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
 
             _dbContext = new MyDbContext(optionsBuilder.Options);
         }
