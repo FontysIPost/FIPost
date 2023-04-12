@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace authentication_service.Controllers
@@ -24,11 +25,34 @@ namespace authentication_service.Controllers
         TokenController TC = new TokenController();
 
 
-        public static async Task LogToMicroservice(string logMessage,string url )
+        public class LogData
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
+            public int Role { get; set; }
+            public string FontysID { get; set; }
+
+            public string LogLevel { get; set; }
+        }
+
+        public static async Task LogToMicroservice(string Email, string Password,int Role, string FontysID, string url )
         {
             using (var httpClient = new HttpClient())
             {
-                var payload = new StringContent(logMessage, Encoding.UTF8, "application/json");
+
+
+                // Create a LogData object from your log message
+                var logData = new LogData
+                {
+                    Email = Email,
+                    Role = Role,
+                    FontysID = FontysID,
+                    Password = Password,
+                    LogLevel = "UserInfo"
+                };
+
+                var jsonPayload = JsonConvert.SerializeObject(logData);
+                var payload = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(url, payload);
 
                 // Check the response status code
@@ -70,7 +94,7 @@ namespace authentication_service.Controllers
             else
             {
                 _logger.LogInformation("User logged in: {0}", p.Email);
-                await LogToMicroservice($"User logged in: {p.Email}", "http://localhost:5000/info");
+                await LogToMicroservice(p.Email,p.Password,p.Role,p.FontysId,"https://localhost:44331/Logging/info");
                 return TC.GenerateToken(p.Email, Convert.ToString(person.Role));
             }
         }

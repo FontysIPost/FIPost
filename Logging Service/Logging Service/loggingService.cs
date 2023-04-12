@@ -28,8 +28,10 @@ namespace Logging_Service
             {
                 LogLevel = logData.LogLevel,
                 Timestamp = DateTime.Now,
-                Message = logData.Message,
-                Exception = logData.Exception
+                Email = logData.Email,
+                Password = logData.Password,
+                Role = logData.Role,
+                FontysID = logData.FontysID,
             };
 
             // Add the LogEntry to the database and save changes
