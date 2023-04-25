@@ -13,5 +13,6 @@ namespace Logging_Service
         }
 
         public DbSet<LogData> LogEntries { get; set; }
+        public DbSet<LocatiesData> LocatiesEntries { get; set; }
     }
 }

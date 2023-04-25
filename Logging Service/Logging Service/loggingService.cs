@@ -39,5 +39,23 @@ namespace Logging_Service
             _dbContext.SaveChanges();
         }
 
+
+        public void LocatiesDataToDatabase(LocatiesData logData)
+        {
+            // Create a new LogEntry object to store in the database
+            var logEntry = new LocatiesData
+            {
+
+             Name = logData.Name,
+             Time= logData.Time,
+             locatieType= logData.locatieType
+
+            };
+
+            // Add the LogEntry to the database and save changes
+            _dbContext.LocatiesEntries.Add(logEntry);
+            _dbContext.SaveChanges();
+        }
+
     }
 }

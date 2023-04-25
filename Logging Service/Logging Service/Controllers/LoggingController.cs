@@ -49,5 +49,15 @@ namespace Logging_Service.Controllers
             // Return a success response
             return Ok();
         }
+
+
+        [HttpPost("locatie")]
+        public IActionResult Addlocaties([FromBody] LocatiesData logData)
+        {
+            _loggingService.LocatiesDataToDatabase(logData);
+
+            // Return a success response
+            return Ok();
+        }
     }
 }
