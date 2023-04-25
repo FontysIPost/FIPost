@@ -109,10 +109,6 @@ ClickedTest(){
 
 <style lang="scss" scoped>
 @import "@/styling/main.scss";
-.editColumn{
-    width: 20px;
-    
-}
 
 .table-container {
   padding: 0 !important;
@@ -141,7 +137,12 @@ th {
 table td,
 th {
   padding: 0.75em !important;
-  width: 350px;
+  width: 25%;
+}
+@media only screen and (max-width: 650px) {
+  th {
+    width: 20%;
+  }
 }
 
 td:first-child {
@@ -149,7 +150,6 @@ td:first-child {
 }
 
 .hide {
-  display: none;
   padding-left: 1rem;
   max-height: 1rem;
   content: url("~@/assets/icons8-edit.svg");

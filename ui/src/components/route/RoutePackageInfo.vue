@@ -2,14 +2,9 @@
   <div class="route-package-info-container" @click="toggle()">
     <div class="title">
       <div class="container-header text">Geschiedenis</div>
-      <div v-if="mobile" class="arrow">
-        <div v-if="toggled">
-          <font-awesome-icon icon="sort-up" size="2x" />
+        <div @click="mobile = !mobile">
+            <font-awesome-icon class="toggleUpDown arrow" :class='{ "rotate": toggled }' icon="sort-up" size="2x" />
         </div>
-        <div v-else>
-          <font-awesome-icon icon="sort-down" size="2x" />
-        </div>
-      </div>
     </div>
     <div v-if="toggled">
       <RouteComp :tickets="tickets" />
@@ -66,7 +61,6 @@ export default class RoutePackageInfo extends Vue {
   padding: 3em;
   box-shadow: $shadow;
   border-radius: $border-radius;
-  row-gap: 4em;
   text-align: left;
   @media only screen and (max-width: 600px) {
     padding: 2em;
@@ -85,6 +79,14 @@ export default class RoutePackageInfo extends Vue {
 
 .arrow {
   color: $modern-purple-color;
+}
+
+.toggleUpDown {
+  transition: transform .1s ease-in-out !important;
+}
+
+.toggleUpDown.rotate {
+  transform: rotateX(180deg);
 }
 </style>
 

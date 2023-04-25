@@ -18,19 +18,20 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+        <tbody>
         <tr v-for="entry in filteredItems" :key="entry">
           <td
             v-for="cell in entry"
             :key="cell"
             @click="$emit('cell-clicked', cell)"
+            :class="{'cell-green': cell.displayName === 'Afgeleverd', 'cell-orange': cell.displayName === 'In behandeling'}"
             class="hoverElement"
           >
             {{ cell.displayName }}
             <span class="hide" v-if="editable" />
           </td>
         </tr>
-      </tbody>
+        </tbody>
     </table>
   </div>
 </template>
@@ -170,6 +171,13 @@ td:first-child {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid $black-color;
+}
+
+.cell-green {
+  color: forestgreen;
+}
+.cell-orange {
+  color: orange;
 }
 
 td {

@@ -8,21 +8,6 @@
      <div class="container-group">
       <div class="header">Dashboard</div>
       <hr />
-       <div class="flex-container">
-         <div class="email-inline">
-           <div v-if="role === 0">
-             Administrator:
-           </div>
-           <div v-else>
-             Medewerker:
-           </div>
-           {{email}}
-         </div>
-         <div>
-           <button type="button" class="modal-default-button" @click="logout">Logout</button>
-         </div>
-         <br>
-       </div>
     </div>
   </div>
 </template>
@@ -70,11 +55,7 @@ const Home = defineComponent({
       'headers': {'Authorization': 'Bearer ' + localStorage.getItem('token')}
     }
     axios.get('https://localhost:44369/api/Authentication/auth', config )
-        .then(response => {
-          this.email = response.data.email;
-          this.role = response.data.role;
-        })
-    .catch(err => {
+    .catch(() => {
       this.$router.push("/login");
     })
   }
@@ -106,18 +87,6 @@ export default Home;
     opacity: 0.2;
     margin: 1em 0;
   }
-}
-.modal-default-button {
-  float: left;
-  background-color: $modern-purple-color;
-  border: none;
-  width: 100px;
-  height: 30px;
-  border-radius: $small-border-radius;
-  box-shadow: $shadow;
-  font-family: $font-family;
-  color: white;
-  cursor: pointer;
 }
 .flex-container {
   display: flex;

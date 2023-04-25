@@ -49,7 +49,7 @@ const Menu = defineComponent({
         "getUserMedia" in navigator.mediaDevices
       ) {
         // ok, browser supports it
-        alert("supoort");
+        alert("support");
       }
     },
     locationClicked(): void {
@@ -71,6 +71,12 @@ export default Menu;
   flex-wrap: wrap;
   column-gap: 1.5em;
   row-gap: 1.5em;
+}
+
+@media only screen and (max-width: 519px) {
+  .m-container {
+    justify-content: center;
+  }
 }
 
 .slot {

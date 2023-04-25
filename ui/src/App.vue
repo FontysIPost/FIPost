@@ -140,5 +140,7 @@ export default class App extends Vue {
   text-align: center;
   color: $black-color;
   padding: 1em;
+  display: flex;
+  justify-content: center;
 }
 </style>
