@@ -4,9 +4,19 @@
       <div class="container container-header">Pakketgegevens</div>
 
       <div class="details-wrapper">
+        
+        <div class="pd-container">
         <div class="pd-content">
           <div class="container-subheader-small">Pakketnaam</div>
-          <div class="pd-item">{{ packageM.name }}</div>
+          <div class="pd-item">
+              {{
+              packageM.name
+              }}
+          </div>
+        </div>
+          <div class="sd-img">
+            <img alt="BoxQR" src="@/assets/BoxQR.png" />
+          </div>
         </div>
 
         <PersonDetails :person="packageM.receiver" />
@@ -21,9 +31,6 @@
                   : "De afzender kan niet worden opgehaald"
               }}
             </div>
-          </div>
-          <div class="sd-img">
-            <img alt="BoxQR" src="@/assets/BoxQR.png" />
           </div>
         </div>
 

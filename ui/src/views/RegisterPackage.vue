@@ -363,7 +363,7 @@ export default class RegisterPackage extends Vue {
 
 hr {
   opacity: 0.4;
-  margin: 0px 0;
+  margin: 0 0;
 }
 
 .group {

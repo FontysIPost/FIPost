@@ -125,23 +125,25 @@ export default class PackagePage extends Vue {
 @import "@/styling/main.scss";
 
 .page {
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   column-gap: 1em;
 
   .pi-item-container {
-    width: 48%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
   }
 
   @media only screen and (max-width: 865px) {
+    justify-content: center;
     flex-direction: column;
     row-gap: 15px;
-
     .pi-item-container {
-      width: 90%;
+      width: 100%;
+    
     }
   }
 }

@@ -68,7 +68,7 @@
 
                 <InputField
                   label="Voer FontysID in:"
-                  v-model:input="inputFontysID"
+                  v-model:input="inputFontysID" 
                   @update:input="fontysIDCharacterCheck"
                 />
                
