@@ -5,10 +5,6 @@
       <hr />
       <Menu />
     </div>
-     <div class="container-group">
-      <div class="header">Dashboard</div>
-      <hr />
-    </div>
   </div>
 </template>
 

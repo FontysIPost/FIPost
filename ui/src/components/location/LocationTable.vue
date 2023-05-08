@@ -150,6 +150,7 @@ td:first-child {
 }
 
 .hide {
+  display: none;
   padding-left: 1rem;
   max-height: 1rem;
   content: url("~@/assets/icons8-edit.svg");

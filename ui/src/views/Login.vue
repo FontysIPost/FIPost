@@ -1,32 +1,30 @@
 <template>
-  <div class="align-left">
-    <div class="component-container">
-      <h1>{{ !overview ? "Login" : "Overzicht" }}</h1>
-      <LoadingIcon v-if="loadPers || loadRoom" />
-      <div v-else>
-        <div v-if="!overview">
-          <div class="group">
-            <InputField
-              textType="email"
-              label="E-mail:"
-              v-model:input="email"
-            />
-            <InputField
-              label="Wachtwoord:"
-              v-model:input="password"
-              textType="password"
-            />
-          </div>
+  <div class="component-container">
+    <h1>{{ !overview ? "Login" : "Overzicht" }}</h1>
+    <LoadingIcon v-if="loadPers || loadRoom" />
+    <div v-else>
+      <div v-if="!overview">
+        <div class="group">
+          <InputField
+            textType="email"
+            label="E-mail:"
+            v-model:input="email"
+          />
+          <InputField
+            label="Wachtwoord:"
+            v-model:input="password"
+            textType="password"
+          />
         </div>
-        <ul v-if="errorText">
-            <li v-for="e in error" :key="e" class="error-text">{{ e }}</li>
-        </ul>
-        <SmallBtnFinish
-          :text="btnText"
-          :red="btnText === 'Opnieuw' ? true : false"
-          v-on:click="toggleStep"
-        />
       </div>
+      <ul v-if="errorText">
+          <li v-for="e in error" :key="e" class="error-text">{{ e }}</li>
+      </ul>
+      <SmallBtnFinish
+        :text="btnText"
+        :red="btnText === 'Opnieuw' ? true : false"
+        v-on:click="toggleStep"
+      />
     </div>
   </div>
 </template>
@@ -101,13 +99,26 @@ export default class Login extends Vue {
 <style scoped lang="scss">
 @import "@/styling/main.scss";
 
+.component-container {
+  width: 25%;
+  
+}
+@media only screen and (max-width: 1100px) {
+  .component-container {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .component-container {
+    width: 90%;
+  }
+}
+
 .SmallBtnFinish{
     width: 180px;
 }
 
-.align-left {
-  text-align: left;
-}
 .margin-button {
   margin-right: 5%;
 }
