@@ -89,7 +89,7 @@ button {
 }
 
 .save {
-    background-color: #007aff;
+    background-color: #3f3cc9;
     margin-left: 10px;
     border: none;
     border-radius: 4px;
