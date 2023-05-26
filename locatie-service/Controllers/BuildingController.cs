@@ -2,6 +2,7 @@
 using LocatieService.Database.Datamodels.Dtos;
 using LocatieService.Helpers;
 using LocatieService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace LocatieService.Controllers
 {
     [ApiController]
     [Route("api/buildings")]
+    [Authorize]
     public class BuildingController : Controller
     {
         private readonly IBuildingService _service;
@@ -21,6 +23,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "0")]
         public async Task<ActionResult<BuildingResponse>> AddBuilding(BuildingRequest request)
         {
             try
@@ -34,7 +37,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BuildingResponse>>> GetAllBuildings()
+        public async Task<ActionResult<List<BuildingResponse>>> GetAllBuildings([FromHeader] string Authorization)
         {
             return Ok(await _service.GetAllAsync());
         }
@@ -68,6 +71,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "0")]
         [Route("{id}")]
         public async Task<ActionResult<BuildingResponse>> UpdateBuilding(Guid id, BuildingRequest request)
         {
@@ -86,6 +90,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "0")]
         [Route("{id}")]
         public async Task<ActionResult<BuildingResponse>> DeleteBuildingById(Guid id)
         {

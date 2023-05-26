@@ -1,21 +1,17 @@
-﻿using authentication_service.Data;
-using authentication_service.Models;
+﻿using authentication_service.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace authentication_service.Controllers
 {
     public class AuthenticationController : Controller
     {
         private readonly DataContext db;
-        TokenController TC = new TokenController();
+        TokenController TC = new();
         public AuthenticationController(DataContext db)
         {
             this.db = db;
@@ -29,14 +25,7 @@ namespace authentication_service.Controllers
                              where Person.Email == p.Email && Person.Password == p.Password
                              select Person).FirstOrDefault();
 
-            if (person == null)
-            {
-                return Unauthorized();
-            }
-            else
-            {
-                return TC.GenerateToken(p.Email, Convert.ToString(person.Role));
-            }
+            return person == null ? Unauthorized() : TC.GenerateToken(p.Email, Convert.ToString(person.Role));
         }
 
         [Route("/api/[controller]/register")]
@@ -55,14 +44,22 @@ namespace authentication_service.Controllers
             string[] token = Authorization.Split(' ');
             var handler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = handler.ReadJwtToken(token[1]);
+            string email = "";
+            int role = 0;
             foreach (Claim c in jwtSecurityToken.Claims)
             {
                 if (c.Type == "email")
                 {
-                    return c.Value;
+                    email = c.Value;
+                }
+                else if (ClaimTypes.Role == c.Type)
+                {
+                    role = Convert.ToInt32(c.Value);
                 }
             }
-            return "";
+            UserResponse userResponse = new UserResponse(email, role);
+            string jSonObject = JsonConvert.SerializeObject(userResponse);
+            return jSonObject;
         }
 
         [HttpGet]

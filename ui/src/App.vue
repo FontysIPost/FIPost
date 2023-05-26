@@ -49,13 +49,10 @@ export default class App extends Vue {
   async mounted() {
     this.emitter.on("err", (err: AxiosError) => {
       if(err.response != null){
-        if(err.response.status == 500 || err.response.status == 404 || err.response.status == 400){
+        if(err.response.status == 500 || err.response.status == 404 || err.response.status == 400 || err.response.status == 401){
             this.stayOnExit = false;
         }
         else{
-          if (err.response.status == 401){
-            this.is401Error = true;
-          }
           this.stayOnExit = true;
         }
         this.body = err.response.data;
@@ -143,5 +140,7 @@ export default class App extends Vue {
   text-align: center;
   color: $black-color;
   padding: 1em;
+  display: flex;
+  justify-content: center;
 }
 </style>

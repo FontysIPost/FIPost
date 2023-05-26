@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PakketService.Database.Datamodels.Dtos;
 using PakketService.helpers;
 using PakketService.Services;
@@ -8,6 +9,7 @@ namespace PakketService.Controllers
 {
     [Route("api/tickets")]
     [ApiController]
+    [Authorize]
     public class TicketsController : ControllerBase
     {
         private readonly ITicketService _service;

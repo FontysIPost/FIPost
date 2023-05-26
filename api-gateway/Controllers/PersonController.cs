@@ -24,9 +24,9 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ICollection<PersonServiceModel>>> GetPersons()
+        public async Task<ActionResult<ICollection<PersonServiceModel>>> GetPersons([FromHeader] string Authorization)
         {
-            IFlurlResponse flurlResponse = await $"{Constants.PersonApiUrl}/api/persons".GetAsync();
+            IFlurlResponse flurlResponse = await $"{Constants.PersonApiUrl}/api/persons".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
 
             var response = flurlResponse.GetResponse("Er zijn geen personen gevonden.");
 
@@ -44,9 +44,9 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PersonServiceModel>> GetPersonById(string id)
+        public async Task<ActionResult<PersonServiceModel>> GetPersonById(string id, [FromHeader] string Authorization)
         {
-            IFlurlResponse flurlResponse = await $"{Constants.PersonApiUrl}/api/persons/{id}".GetAsync();
+            IFlurlResponse flurlResponse = await $"{Constants.PersonApiUrl}/api/persons/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
 
             var response = flurlResponse.GetResponse("De persoon die u probeert op te zoeken kan niet gevonden worden.");
 
@@ -64,9 +64,9 @@ namespace api_gateway.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PersonServiceModel>> getByFontysId(string id)
+        public async Task<ActionResult<PersonServiceModel>> getByFontysId(string id, [FromHeader] string Authorization)
         {
-            IFlurlResponse flurlResponse = await $"{Constants.PersonApiUrl}/api/persons/getbyfontysid/{id}".GetAsync();
+            IFlurlResponse flurlResponse = await $"{Constants.PersonApiUrl}/api/persons/getbyfontysid/{id}".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
 
             var response = flurlResponse.GetResponse("De persoon die u probeert op te zoeken kan niet gevonden worden.");
 

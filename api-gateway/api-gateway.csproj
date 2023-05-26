@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>api_gateway</RootNamespace>
     <UserSecretsId>aa6ec387-f82b-4ed5-86c4-dcb5213ee53e</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>

@@ -1,0 +1,13 @@
+﻿global using System;
+global using System.Text;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.IdentityModel.Tokens;
+global using PakketService.Database.Contexts;
+global using PakketService.Database.Converters;
+global using PakketService.Database.Datamodels;
+global using PakketService.Database.Datamodels.Dtos;
+global using PakketService.Services;

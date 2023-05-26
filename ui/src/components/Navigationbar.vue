@@ -4,8 +4,18 @@
       <div class="logo-container" @click="logoClicked()">
         <div class="logo"></div>
       </div>
-      <div class="other">
-        
+      <div class="user" v-if="email.toString().endsWith('@student.fontys.nl')">
+          <div class="role">
+              <div v-if="role === 0">
+                  Administrator: {{email}}
+              </div>
+              <div v-else>
+                  Medewerker: {{email}}
+              </div>
+          </div>
+          <div>
+              <button type="button" class="modal-default-button" @click="logout">Logout</button>
+          </div>
       </div>
     </div>
   </div>
@@ -13,12 +23,40 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import axios from "axios";
 const Navigationbar = defineComponent({
-  methods: {
+    data() {
+        return {
+            email: String,
+            role: Number
+        };
+    },
+    methods: {
     logoClicked() : void {
       this.$router.push('/');
+    },
+      logout(){
+        localStorage.clear();
+        location.reload();
+          setTimeout(() => {
+              location.reload();
+          }, 10);
+      }
+  },
+    mounted() {
+      //axios get
+      const config = {
+        'headers': {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+      }
+      axios.get('https://localhost:44369/api/Authentication/auth', config )
+        .then(response => {
+            this.email = response.data.email;
+            this.role = response.data.role;
+        })
+        .catch(() => {
+            this.$router.push("/login");
+        })
     }
-  }
 });
 export default Navigationbar;
 </script>
@@ -49,8 +87,6 @@ export default Navigationbar;
 
   .logo-container {
     max-width: 100px;
-    width: 20%;
-    height: 90%;
     margin: 10px;
     margin-left: 15px;
     cursor: pointer;
@@ -67,11 +103,20 @@ export default Navigationbar;
     }
   }
 
-  .other {
-    margin-right: 15px;
+  .user {
+    display: flex;
+    margin: 20px;
   }
 }
-
+@media only screen and (max-width: 586px) {
+  .role {
+    visibility: hidden;
+    width: 1px;
+  }
+  .modal-default-button {
+    margin-top: 8px;
+  }
+} 
 .nav-extra {
   display: none;
 }
@@ -88,5 +133,20 @@ export default Navigationbar;
       margin: auto;
     }
   }
-}
+}.modal-default-button {
+   margin-left: 20px;
+   float: left;
+   background-color: $modern-purple-color;
+   border: none;
+   width: 100px;
+   height: 30px;
+   border-radius: $small-border-radius;
+   box-shadow: $shadow;
+   font-family: $font-family;
+   color: white;
+   cursor: pointer;
+ }
+ .role {
+   margin-top: 5px;
+ }
 </style>
