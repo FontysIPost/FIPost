@@ -57,5 +57,26 @@ namespace Logging_Service
             _dbContext.SaveChanges();
         }
 
+
+        public void PakketjesDataToDatabase(PakketjeData logData)
+        {
+            // Create a new LogEntry object to store in the database
+            var logEntry = new PakketjeData
+            {
+
+                personID = logData.personID,
+                Pakketname=logData.Pakketname,
+                ReceiverID=logData.ReceiverID,
+                Sender=logData.Sender,
+                LocationID=logData.LocationID,
+                Time=logData.Time
+
+            };
+
+            // Add the LogEntry to the database and save changes
+            _dbContext.PakketjesEntries.Add(logEntry);
+            _dbContext.SaveChanges();
+        }
+
     }
 }

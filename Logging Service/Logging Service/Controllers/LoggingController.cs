@@ -59,5 +59,14 @@ namespace Logging_Service.Controllers
             // Return a success response
             return Ok();
         }
+
+        [HttpPost("Pakketje")]
+        public IActionResult Addpakket([FromBody] PakketjeData logData)
+        {
+            _loggingService.PakketjesDataToDatabase(logData);
+
+            // Return a success response
+            return Ok();
+        }
     }
 }
