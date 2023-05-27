@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="component">
     <btn-back />
     <h1>Locatie Overzicht</h1>
     <SearchContainerLocation />
@@ -25,4 +25,12 @@ export default class LocatieOverzicht extends Vue {}
 
 <style scoped lang="scss">
 @import "@/styling/main.scss";
+.component {
+  width: 60%;
+}
+@media only screen and (max-width: 930px) {
+  .component {
+    width: 95%;
+  }
+}
 </style>

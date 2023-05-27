@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PakketService.Database.Converters;
-using PakketService.Database.Datamodels;
-using PakketService.Database.Datamodels.Dtos;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PakketService.helpers;
-using PakketService.Services;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -45,6 +41,7 @@ namespace PakketService.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<PackageResponse>>> GetAllPackages()
         {
             return Ok(await _service.GetAllAsync());
@@ -65,6 +62,7 @@ namespace PakketService.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Roles = "0")]
         public async Task<ActionResult<PackageResponse>> UpdatePackage(Guid id, PackageRequest request)
         {
             try
@@ -75,13 +73,6 @@ namespace PakketService.Controllers
             {
                 return NotFound(e.Message);
             }
-        }
-
-        [HttpGet]
-        [Route("health")]
-        public ActionResult Health()
-        {
-            return Ok();
         }
     }
 }

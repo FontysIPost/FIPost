@@ -1,93 +1,91 @@
 <template>
-  <div class="align-left">
-    <BtnBack class="button-back" />
-    <div class="component-container">
-      <h1>{{ !overview ? "Pakket Registreren" : "Overzicht" }}</h1>
-      <LoadingIcon v-if="loadPers || loadRoom" />
-      <div v-else>
-        <div v-if="!overview">
-          <div class="group">
-            <h3>Pakketinformatie</h3>
-            <InputField
-              label="Afzender:"
-              v-model:input="fpackage.Sender"
-              :valid="v.SenderHasValue"
-              @update:input="v.SenderHasValue = true"
-            />
-            <InputField
-              label="Pakketnaam:"
-              v-model:input="fpackage.Name"
-              :valid="v.NameHasValue"
-              @update:input="v.NameHasValue = true"
-            />
-            <CBSearchSuggestions
-              :options="receivers"
-              label="Ontvanger:"
-              @select-changed="receiverChanged"
-              :selectedOption="selectedReceiver()"
-              :valid="v.ReceiverIdValid"
-            />
-            <CBSearchSuggestions
-              :options="rooms"
-              label="Afhaalpunt:"
-              @selectChanged="collectionPointChanged"
-              :selectedOption="selectedCollectionPoint()"
-              :valid="v.CollectionPointIdValid"
-            />
-          </div>
-          <div class="group">
-            <h3>Registratieinformatie</h3>
-            <CBSearchSuggestions
-              :options="receivers"
-              label="Registreerder:"
-              @selectChanged="registratorChanged"
-              :valid="v.CreatedByPersonIdValid"
-              :selectedOption="selectedRegistrator()"
-            />
-            <CBSearchSuggestions
-              :options="rooms"
-              label="Aangekomen op:"
-              @selectChanged="registerLocationChanged"
-              :valid="v.CreatedAtLocationIdValid"
-              :selectedOption="selectedCreatedAtLocation()"
-            />
-          </div>
-
-          <ul v-if="errorText">
-            <li v-for="e in error" :key="e" class="error-text">{{ e }}</li>
-          </ul>
+  <BtnBack class="button-back" />
+  <div class="component-container">
+    <h1>{{ !overview ? "Pakket Registreren" : "Overzicht" }}</h1>
+    <LoadingIcon v-if="loadPers || loadRoom" />
+    <div v-else>
+      <div v-if="!overview">
+        <div class="group">
+          <h3>Pakketinformatie</h3>
+          <InputField
+            label="Afzender:"
+            v-model:input="fpackage.Sender"
+            :valid="v.SenderHasValue"
+            @update:input="v.SenderHasValue = true"
+          />
+          <InputField
+            label="Pakketnaam:"
+            v-model:input="fpackage.Name"
+            :valid="v.NameHasValue"
+            @update:input="v.NameHasValue = true"
+          />
+          <CBSearchSuggestions
+            :options="receivers"
+            label="Ontvanger:"
+            @select-changed="receiverChanged"
+            :selectedOption="selectedReceiver()"
+            :valid="v.ReceiverIdValid"
+          />
+          <CBSearchSuggestions
+            :options="rooms"
+            label="Afhaalpunt:"
+            @selectChanged="collectionPointChanged"
+            :selectedOption="selectedCollectionPoint()"
+            :valid="v.CollectionPointIdValid"
+          />
+        </div>
+        <div class="group">
+          <h3>Registratieinformatie</h3>
+          <CBSearchSuggestions
+            :options="receivers"
+            label="Registreerder:"
+            @selectChanged="registratorChanged"
+            :valid="v.CreatedByPersonIdValid"
+            :selectedOption="selectedRegistrator()"
+          />
+          <CBSearchSuggestions
+            :options="rooms"
+            label="Aangekomen op:"
+            @selectChanged="registerLocationChanged"
+            :valid="v.CreatedAtLocationIdValid"
+            :selectedOption="selectedCreatedAtLocation()"
+          />
         </div>
 
-        <div v-else>
-          <div class="container">
-            <div class="group">
-              <h2>Pakketinformatie</h2>
-              <p><strong>Afzender:</strong> {{ fpackage.Sender }}</p>
-              <p><strong>Pakketnaam:</strong> {{ fpackage.Name }}</p>
-              <p><strong>Ontvanger:</strong> {{ receiverName }}</p>
-              <p><strong>Afhaalpunt:</strong> {{ collectionPointName }}</p>
-            </div>
-            <hr />
-            <div class="group">
-              <h2>Registratieinformatie</h2>
-              <p><strong>Registreerder:</strong> {{ registratorName }}</p>
-              <p><strong>Ontvangslocatie:</strong> {{ createdAtPointName }}</p>
-            </div>
-          </div>
-        </div>
-        <SmallBtnFinish
-          :text="btnText"
-          :red="btnText == 'Vorige' ? true : false"
-          v-on:click="toggleStep"
-          :disabled="loadPostRequest"
-        />
-        <SmallBtnFinish
-          text="Bevestigen"
-          @btn-clicked="registerPackage"
-          v-if="overview"
-          :isLoading="loadPostRequest"
-        />
+        <ul v-if="errorText">
+          <li v-for="e in error" :key="e" class="error-text">{{ e }}</li>
+        </ul>
       </div>
+
+      <div v-else>
+        <div class="container">
+          <div class="group">
+            <h2>Pakketinformatie</h2>
+            <p><strong>Afzender:</strong> {{ fpackage.Sender }}</p>
+            <p><strong>Pakketnaam:</strong> {{ fpackage.Name }}</p>
+            <p><strong>Ontvanger:</strong> {{ receiverName }}</p>
+            <p><strong>Afhaalpunt:</strong> {{ collectionPointName }}</p>
+          </div>
+          <hr />
+          <div class="group">
+            <h2>Registratieinformatie</h2>
+            <p><strong>Registreerder:</strong> {{ registratorName }}</p>
+            <p><strong>Ontvangslocatie:</strong> {{ createdAtPointName }}</p>
+          </div>
+        </div>
+      </div>
+      <SmallBtnFinish
+        :text="btnText"
+        :red="btnText == 'Vorige' ? true : false"
+        v-on:click="toggleStep"
+        :disabled="loadPostRequest"
+      />
+      <SmallBtnFinish
+        text="Bevestigen"
+        @btn-clicked="registerPackage"
+        v-if="overview"
+        :isLoading="loadPostRequest"
+      />
     </div>
   </div>
 </template>
@@ -354,16 +352,30 @@ export default class RegisterPackage extends Vue {
 <style scoped lang="scss">
 @import "@/styling/main.scss";
 
-.align-left {
-  text-align: left;
+.component-container {
+  margin-top: 2em;
 }
+
+
+@media only screen and (max-width: 600px) {
+  .component-container {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .component-container {
+    width: 100%;
+  }
+}
+
 .margin-button {
   margin-right: 5%;
 }
 
 hr {
   opacity: 0.4;
-  margin: 0px 0;
+  margin: 0 0;
 }
 
 .group {

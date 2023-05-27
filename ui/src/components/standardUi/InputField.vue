@@ -71,7 +71,7 @@ export default class InputField extends Vue {
   min-width: 150px;
 
   @media only screen and (max-width: 600px) {
-    width: 150px;
+    width: 250px;
     left: 0px;
     top: 0px;
   }

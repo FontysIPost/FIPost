@@ -28,14 +28,14 @@ export default BtnBack;
 @import "@/styling/main.scss";
 
 .btn-back {
-  width: 100px;
+  width: 0;
   height: 40px;
 
   background: transparent;
   color: #000000;
 
   border-radius: 10px;
-  border: 0px;
+  border: 0;
 
   font-weight: bold;
   font-size: 16px;

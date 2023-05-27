@@ -1,3 +1,4 @@
+[![Build microservices](https://github.com/FontysIPost/FIPost/actions/workflows/build-and-test-microservices.yml/badge.svg)](https://github.com/FontysIPost/FIPost/actions/workflows/build-and-test-microservices.yml)
 [![SonarCloud analysis](https://github.com/FontysIPost/FIPost/actions/workflows/sonarcloud-scanner.yml/badge.svg)](https://github.com/FontysIPost/FIPost/actions/workflows/sonarcloud-scanner.yml)
 
 <img align="right" width="30%" src="./resources/logo.png"></img>
@@ -40,15 +41,15 @@ s3 > s6 > year pause > s6 team (current)
 - **Node version:** 14.15.5
 - **NPM version:** 6.14.11
 - **Frontend:** [VueJS](https://vuejs.org/guide/introduction.html) - HTML/[SCSS](https://sass-lang.com/documentation/syntax)/JavaScript and [TypeScript](https://www.typescriptlang.org/docs/)
-- **Backend:** [.NET Core 3.1](https://download.visualstudio.microsoft.com/download/pr/b70ad520-0e60-43f5-aee2-d3965094a40d/667c122b3736dcbfa1beff08092dbfc3/dotnet-sdk-3.1.426-win-x64.exe)
+- **Backend:** [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-aspnetcore-6.0.0-windows-x64-installer)
 
-### 📁 Structure and services
+### 📁 Structure & services
 - [./ui/](https://github.com/FontysIPost/FIPost/tree/master/ui) Frontend UI of Fontys Internal Post system
 - [./api-gateway/](https://github.com/FontysIPost/FIPost/tree/master/api-gateway) API gateway to reroute and log the system of services
 - [./authentication-service/](https://github.com/FontysIPost/FIPost/tree/master/authentication-service) Login service
 - [./pakketservice/](https://github.com/FIPost/tree/master/pakketservice) Post, Letter and package management
 - [./Locatie-service/](https://github.com/FontysIPost/FIPost/tree/master/locatieservice) Track and trace and location register
-- [./Personeel-service/](https://github.com/FontysIPost/FIPost/tree/master/personeel-service) Employee management for package registration
+- [./EmployeeService/](https://github.com/FontysIPost/FIPost/tree/master/personeel-service) Employee management for package registration
 
 
 ### 🏁 Getting started:
@@ -72,7 +73,7 @@ Run the frontend UI and open `http://localhost:8080/` when ready:
 ```sh
 npm run serve
 ```
-Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice` and `./personeel-service` and put your credentials:
+Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice` and `./EmployeeService` and put your credentials:
 ```json
 {
   "ConnectionString": "Server=;Database=;User Id=;Password=;",
@@ -85,7 +86,7 @@ Create a `MSSQL` Database and navigate to three `appsettings.Development.json` i
   }
 }
 ```
-Run all the following services, `personeel-service: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
+Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
 
 In order to use the functionality in the application, you have to put your login info into your database table Person. Then you can access the dashboard.
 

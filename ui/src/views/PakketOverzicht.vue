@@ -157,4 +157,19 @@ export default class PakketOverzicht extends Vue {
 
 <style scoped lang="scss">
 @import "@/styling/main.scss";
+#overzicht {
+  width: 70%;
+}
+
+@media only screen and (max-width: 1290px) {
+  #overzicht {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  #overzicht {
+    width: 95%;
+  }
+}
 </style>

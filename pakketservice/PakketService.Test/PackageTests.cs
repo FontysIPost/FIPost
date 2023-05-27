@@ -150,19 +150,5 @@ namespace PakketService.Test
             Assert.IsNotNull(actionResult);
             Assert.IsInstanceOf<NotFoundObjectResult>(actionResult.Result);
         }
-
-        [Test]
-        public void Health_Ok()
-        {
-            // Arrange
-            var controller = new PackagesController(serviceMock.Object);
-
-            // Act
-            var actionResult = controller.Health();
-
-            // Assert
-            Assert.IsNotNull(actionResult);
-            Assert.IsInstanceOf<OkResult>(actionResult);
-        }
     }
 }

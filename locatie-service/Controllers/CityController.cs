@@ -2,6 +2,7 @@ using LocatieService.Database.Datamodels;
 using LocatieService.Database.Datamodels.Dtos;
 using LocatieService.Helpers;
 using LocatieService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace LocatieService.Controllers
 {
     [ApiController]
     [Route("api/cities")]
+    [Authorize]
     public class CityController : Controller
     {
         private readonly ICityService _service;
@@ -22,6 +24,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "0")]
         public async Task<ActionResult<CityResponse>> AddCity(CityRequest request)
         {
             try
@@ -78,6 +81,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "0")]
         [Route("{id}")]
         public async Task<ActionResult<CityResponse>> UpdateCity(Guid id, CityRequest request)
         {
@@ -96,6 +100,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "0")]
         [Route("{id}")]
         public async Task<ActionResult<CityResponse>> DeleteCityById(Guid id)
         {
@@ -108,13 +113,6 @@ namespace LocatieService.Controllers
             {
                 return NotFound(e.Message);
             }
-        }
-
-        [HttpGet]
-        [Route("health")]
-        public ActionResult Health()
-        {
-            return Ok();
         }
     }
 }

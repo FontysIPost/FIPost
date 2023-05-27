@@ -1,51 +1,83 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+const string SECRET_KEY = "this is my custom Secret key for authnetication";
+var SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
 
-namespace PakketService
+var builder = WebApplication.CreateBuilder(args);
+
+// Add context
+var connection = builder.Configuration.GetValue<string>("ConnectionString");
+builder.Services.AddDbContextPool<PackageServiceContext>(
+    options => options.UseSqlServer(connection));
+
+builder.Services.AddControllers();
+
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
+    options.AddPolicy(name: "_myAllowSpecificOrigins",
+        builder =>
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            builder
+            .WithOrigins("*")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
+        });
+}); 
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((context, services) =>
-                {
-                    services.Configure<KestrelServerOptions>(
-                        context.Configuration.GetSection("Kestrel"));
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.ConfigureKestrel(serverOptions =>
-                    {
-                        serverOptions.Limits.MaxConcurrentConnections = 100;
-                        serverOptions.Limits.MaxConcurrentUpgradedConnections = 100;
-                        serverOptions.Limits.MaxRequestBodySize = 10 * 1024;
-                        serverOptions.Limits.MinRequestBodyDataRate =
-                            new MinDataRate(bytesPerSecond: 100,
-                                gracePeriod: TimeSpan.FromSeconds(10));
-                        serverOptions.Limits.MinResponseDataRate =
-                            new MinDataRate(bytesPerSecond: 100,
-                                gracePeriod: TimeSpan.FromSeconds(10));
-                        serverOptions.Limits.KeepAliveTimeout =
-                            TimeSpan.FromDays(30);
-                        serverOptions.Limits.RequestHeadersTimeout =
-                            TimeSpan.FromDays(30);
-                    })
-                    .UseStartup<Startup>()
-                    .UseUrls("http://*:5001"); //Add this line
-                });
-    }
-}
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = "JwtBearer";
+        options.DefaultChallengeScheme = "JwtBearer";
+    })
+    .AddJwtBearer("JwtBearer", jwtOptions =>
+    {
+        jwtOptions.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = SIGNING_KEY,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(5)
+        };
+    }); 
+    
+// Inject services.
+builder.Services.AddTransient<IPackageService, PackageService>();
+builder.Services.AddTransient<ITicketService, TicketService>();
+
+//Inject converter.
+builder.Services.AddScoped<IDtoConverter<Package, PackageRequest, PackageResponse>, DtoConverter>();
+builder.Services.AddScoped<IDtoConverter<Ticket, TicketRequest, TicketResponse>, TicketDtoConverter>();
+
+var app = builder.Build();
+
+// Update the database schema if there are any changes
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var dbContext = services.GetRequiredService<PackageServiceContext>();
+dbContext.Database.Migrate();
+
+if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
+
+
+app.UseHttpsRedirection();
+
+app.UseCors("_myAllowSpecificOrigins");
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "PakketService");
+    // Serve the swagger UI at the app's root
+    c.RoutePrefix = string.Empty;
+});
+
+app.Run();

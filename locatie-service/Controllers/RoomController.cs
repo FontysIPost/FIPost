@@ -1,6 +1,7 @@
 using LocatieService.Database.Datamodels.Dtos;
 using LocatieService.Helpers;
 using LocatieService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace LocatieService.Controllers
 {
     [ApiController]
     [Route("api/rooms")]
+    [Authorize]
     public class RoomController : Controller
     {
         private readonly IRoomService _service;
@@ -20,6 +22,7 @@ namespace LocatieService.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "0")]
         public async Task<ActionResult<RoomResponse>> AddRoom(RoomRequest request)
         {
             try
@@ -74,6 +77,7 @@ namespace LocatieService.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Roles = "0")]
         public async Task<ActionResult<RoomResponse>> UpdateRoom(Guid id, RoomRequest request)
         {
             try
@@ -92,6 +96,7 @@ namespace LocatieService.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "0")]
         public async Task<ActionResult<RoomResponse>> DeleteRoomById(Guid id)
         {
             try
