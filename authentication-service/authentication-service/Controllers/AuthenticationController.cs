@@ -63,14 +63,6 @@ namespace authentication_service.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
         public AuthenticationController(DataContext db, ILogger<AuthenticationController> logger)
         {
             this.db = db;
