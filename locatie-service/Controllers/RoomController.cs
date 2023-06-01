@@ -27,6 +27,12 @@ namespace LocatieService.Controllers
         {
             try
             {
+
+                DateTime Time = DateTime.Now;
+                logData data = new logData(request.Name, "Room", Time);
+
+
+                await logData.LogToMicroserviceAsync(data, "https://localhost:44331/Logging/locatie");
                 return Ok(await _service.AddAsync(request));
             }
             catch (DuplicateException e)
