@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
 namespace LocatieService.Controllers
 {
     [ApiController]
@@ -27,7 +28,16 @@ namespace LocatieService.Controllers
         public async Task<ActionResult<CityResponse>> AddCity(CityRequest request)
         {
             try
+
             {
+
+                DateTime Time = DateTime.Now;
+                logData data = new logData(request.Name,"City", Time);
+
+
+                await logData.LogToMicroserviceAsync(data, "https://localhost:44331/Logging/city");
+
+
                 return Ok(await _service.AddAsync(request));
             }
             catch (DuplicateException e)
