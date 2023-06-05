@@ -11,8 +11,8 @@
         />
       </div>
       <div class="buttons">
-        <button class="finish" @click="undo">Undo</button>
-        <button @click="save">Save</button>
+        <!-- <button class="finish" @click="undo">Undo</button> -->
+        <!-- <button @click="save">Save</button> -->
         <!-- <button @click="change">Change Color</button>
         <button @click="resume">Resume Color</button> -->
       </div>
@@ -82,4 +82,8 @@
   .signaturepad{
     
   }
+  .finish {
+  cursor: pointer;
+  align-self: flex-start;
+}
   </style>

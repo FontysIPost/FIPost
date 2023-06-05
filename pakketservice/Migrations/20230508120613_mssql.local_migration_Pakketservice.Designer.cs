@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PakketService.Database.Contexts;
 
@@ -11,9 +12,10 @@ using PakketService.Database.Contexts;
 namespace PakketService.Migrations
 {
     [DbContext(typeof(PackageServiceContext))]
-    partial class PackageServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20230508120613_mssql.local_migration_Pakketservice")]
+    partial class mssqllocal_migration_Pakketservice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

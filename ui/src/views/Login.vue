@@ -80,6 +80,7 @@ export default class Login extends Vue {
         }) .then(function (response) {
           localStorage.setItem('token', response.data);
           window.location.replace("/")
+          console.log('Hoi')
         })
         .catch(err => {
           if (err.response.status == 401){

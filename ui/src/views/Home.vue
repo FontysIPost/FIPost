@@ -11,12 +11,12 @@
        <div class="flex-container">
          <div class="email-inline">
            <div v-if="role === 0">
-             Administrator:
+             Administrator: {{email}}
            </div>
            <div v-else>
-             Medewerker:
+             Medewerker: {{email}}
            </div>
-           {{email}}
+            
          </div>
          <div>
            <button type="button" class="modal-default-button" @click="logout">Logout</button>
