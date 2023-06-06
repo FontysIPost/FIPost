@@ -22,22 +22,8 @@ namespace PakketService.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<PackageResponse>> AddPackage(PackageRequest request)
-
-
         {
-            DateTime Time = DateTime.Now;
-            logData data = new logData(request.CreatedByPersonId, request.Name, request.ReceiverId, request.Sender, request.CreatedAtLocationId.ToString(), Time);
-            await logData.LogToMicroserviceAsync(data, "https://localhost:44331/Logging/Pakketje");
-
-
             return Ok(await _service.AddAsync(request));
-            //personID
-            //Pakketname
-            //ReceiverID
-            //Sender Ammar
-            //LocationID
-            
-
         }
 
         [HttpGet]
