@@ -88,7 +88,7 @@ Create a `MSSQL` Database and navigate to three `appsettings.Development.json` i
 ```
 Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
 
-In order to use the functionality in the application, you have to put your login info into your database table Person. Then you can access the dashboard.
+In order to use the functionality in the application, you have to put your login info into your database table Person, `0 = Admin` and `1 = Employee` access. Then you can access the dashboard.
 
 
 ## 🤝 Credits & Collaboration
