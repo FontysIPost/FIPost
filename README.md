@@ -102,5 +102,5 @@ Check [CONTRIBUTING](https://github.com/FontysIPost/FIPost/blob/dev/.github/CONT
 
 
 ## ✉️ Contact Us
-Questions? [<ins>Contact us here </ins>](https://github.com/FIPost/docs/blob/master/CONTACT.md) !
+Questions? [<ins>Contact us here </ins>](https://github.com/FIPost/docs/blob/master/CONTACT.md) 
 
