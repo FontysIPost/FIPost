@@ -20,7 +20,7 @@ Keep in mind that this project is broader than just the FHICT.
 This project is part of a long term pilot and is supposed to be developed over multiple semesters
 by different groups of 6~ software engineer students. Transferability is therefore a must.
 
-s3 > s6 > year pause > s6 team (current)
+6s > s3 > s6 > year pause > s6 team (current)
 
 ## 🎯 Goals
 
