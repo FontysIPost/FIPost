@@ -3,6 +3,11 @@
     "mssql1": {
       "type": "mssql",
       "connectionId": "PackageServiceContext"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionString",
+      "dynamicId": null
     }
   }
 }

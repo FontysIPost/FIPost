@@ -3,6 +3,13 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "PackageServiceContext"
+    },
+    "mssql2": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/ipostdb/databases/ipost_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionString",
+      "dynamicId": null
     }
   }
 }
