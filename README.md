@@ -22,6 +22,10 @@ by different groups of 6~ software engineer students. Transferability is therefo
 
 6s > s3 > s6 > year pause > s6 team (current)
 
+### ✉️ Contact Us
+Mandatory to [join the Discord server!](https://discord.gg/3xFK8ZAA3d) The project overseer will guide you to setup the project if needed and other furter enquiries.
+There were some bad management and documentations for the past years so this ends now, rapid development for `2023FALL+` made by `2023SPRING` students.
+
 ## 🎯 Goals
 
 * This project aims to modernise the internal post system of Fontys. Currently most of the administrative work is done manually.
@@ -99,8 +103,4 @@ it is important that everything is well documented. Even though the project will
 every bit of help is appreciated and everyone who is willing to help out is welcome.
 
 Check [CONTRIBUTING](https://github.com/FontysIPost/FIPost/blob/dev/.github/CONTRIBUTING.md) and [WIKI](https://github.com/FontysIPost/FIPost) for information.
-
-
-## ✉️ Contact Us
-Questions?
 
