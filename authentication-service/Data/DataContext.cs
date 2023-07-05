@@ -13,7 +13,6 @@ namespace authentication_service.Data
         {
         }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        //public DbSet<User> Users { get; set; }
         public DbSet<Person> Person { get; set; }
 
 

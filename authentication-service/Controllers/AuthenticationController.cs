@@ -11,7 +11,7 @@ namespace authentication_service.Controllers
     public class AuthenticationController : Controller
     {
         private readonly DataContext db;
-        TokenController TC = new();
+        readonly TokenController TC = new();
         public AuthenticationController(DataContext db)
         {
             this.db = db;
