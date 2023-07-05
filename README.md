@@ -19,7 +19,7 @@ The frontend communicates with the api-gateway to reroute the necessary microser
 
 ### ✉️ Contact Us
 Mandatory to [join the Discord server!](https://discord.gg/3xFK8ZAA3d) The project overseer will guide you to setup the project if needed and other further inquiries.
-There were some bad management and documentations for the past years so this ends now, rapid development for `2023FALL+` made by `2023SPRING` students.
+There were some bad documentations how to kickstart this project so this ends now, rapid development for `2023FALL+` made by `2023SPRING` students.
 
 ## ⚒️ Development
 ### 📐Stack
