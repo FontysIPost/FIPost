@@ -13,7 +13,6 @@
         <Content Remove="EmployeeService.Test\**" />
         <EmbeddedResource Remove="EmployeeService.Test\**" />
         <None Remove="EmployeeService.Test\**" />
-        <Compile Remove="Startup.cs" />
     </ItemGroup>
 
     <ItemGroup>
