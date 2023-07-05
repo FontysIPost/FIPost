@@ -12,7 +12,6 @@
     <Content Remove="PakketService.Test\**" />
     <EmbeddedResource Remove="PakketService.Test\**" />
     <None Remove="PakketService.Test\**" />
-    <Compile Remove="Startup.cs" />
   </ItemGroup>
 
   <ItemGroup>
