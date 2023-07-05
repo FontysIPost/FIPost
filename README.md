@@ -23,7 +23,7 @@ by different groups of 6~ software engineer students. Transferability is therefo
 6s > s3 > s6 > year pause > s6 team (current)
 
 ### ✉️ Contact Us
-Mandatory to [join the Discord server!](https://discord.gg/3xFK8ZAA3d) The project overseer will guide you to setup the project if needed and other furter enquiries.
+Mandatory to [join the Discord server!](https://discord.gg/3xFK8ZAA3d) The project overseer will guide you to setup the project if needed and other further inquiries.
 There were some bad management and documentations for the past years so this ends now, rapid development for `2023FALL+` made by `2023SPRING` students.
 
 ## 🎯 Goals
