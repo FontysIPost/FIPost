@@ -1,9 +1,0 @@
-﻿global using authentication_service.Controllers;
-global using authentication_service.Data;
-global using Microsoft.AspNetCore.Authentication.JwtBearer;
-global using Microsoft.AspNetCore.Builder;
-global using Microsoft.EntityFrameworkCore;
-global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.Hosting;
-global using Microsoft.IdentityModel.Tokens;
-global using System;

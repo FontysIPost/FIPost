@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api-gateway", "api-gateway\api-gateway.csproj", "{F0DE27D7-FD86-43CC-BC48-C111346A8498}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "authentication-service", "authentication-service\authentication-service\authentication-service.csproj", "{34EA20CD-2867-48D3-958A-BFAF49506344}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "authentication-service", "authentication-service\authentication-service.csproj", "{34EA20CD-2867-48D3-958A-BFAF49506344}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocatieService", "locatie-service\LocatieService.csproj", "{4EFA360C-0A57-4AEB-ACD0-AD95C75104F8}"
 EndProject
