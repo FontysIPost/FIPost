@@ -4,11 +4,11 @@
 <img align="right" width="30%" src="./resources/logo.png"></img>
 
 <h3 align="middle">
-<a href="https://github.com/FontysIPost/FIPost">Wiki</a>
+<a href="https://github.com/FontysIPost/FIPost/wiki">Wiki</a>
 <a>•</a>
 <a href="https://github.com/FontysIPost/FIPost/blob/dev/.github/CONTRIBUTING.md">Contributing</a>
 <a>•</a>
-<a href="https://github.com/FontysIPost/FIPost/CONTACT.md">Contact</a>
+<a href="https://discord.gg/3xFK8ZAA3d">Contact</a>
 </h3>
 
 # 📬 Fontys Internal Post (FIPost)
@@ -117,10 +117,9 @@ In order to use the functionality in the application, you have to populate 5 out
 
 See [DATABASE wiki](https://github.com/FontysIPost/FIPost/wiki/Database) how you can populate the exact data into the 5 tables.
 ___
-6. Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
+6. Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express` with the frontend running.
 
-___
-
+Everything should work and ready to develop!
 
 ## 🤝 Credits & Collaboration
 
