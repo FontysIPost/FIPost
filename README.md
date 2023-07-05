@@ -40,7 +40,6 @@ There were some bad management and documentations for the past years so this end
   This is also to help maintain collaboration efficiently and opensource.
 
 ## ⚒️ Development
-
 ### 📐Stack
 - **Node version:** 14.15.5
 - **NPM version:** 6.14.11
@@ -55,29 +54,35 @@ There were some bad management and documentations for the past years so this end
 - [./Locatie-service/](https://github.com/FontysIPost/FIPost/tree/master/locatieservice) Track and trace and location register
 - [./EmployeeService/](https://github.com/FontysIPost/FIPost/tree/master/personeel-service) Employee management for package registration
 
-
 ### 🏁 Getting started:
-Clone the repository:
+1. Clone the repository:
 ```sh
 git clone --recursive https://github.com/FontysIPost/FIPost.git
 ```
-Navigate to `./ui` folder and install dependencies:
+___
+2. Navigate to `./ui` folder and install dependencies:
 ```sh
 # Check which node you're using: node -v
-# To switch node version: nvm use v14.15.5
+# Install nvm(node version manager) to quickly change node versions
+# To install node version: nvm install 14.15.5
+# To switch node version: nvm use 14.15.5
 npm i
 ```
-Copy `.env.example` and past it as `.env` and populate these ports
+___
+3. Copy `.env.example` and past it as `.env` and populate these ports (make sure it's in the root directory of the `ui`):
 ```dotenv
 VUE_APP_API_GATEWAY=https://Localhost:44311
 VUE_APP_URL=Localhost:8080
 ```
-
-Run the frontend UI and open `http://localhost:8080/` when ready:
+___
+4. Run the frontend UI and open `http://localhost:8080/` when ready:
 ```sh
 npm run serve
 ```
-Create a `MSSQL` Database and navigate to three `appsettings.Development.json` in `./locatie-service`, `./pakketservice`, `./authenthication-service` and `./EmployeeService` and put your credentials:
+___
+5. Setting up MSSQL Database:
+
+Create a `MSSQL` Database in `Fontys Portal website > Selfservice portal > MSSQL database` and navigate to four `appsettings.Development.json` in `./locatie-service`, `./pakketservice`, `./authenthication-service` and `./EmployeeService` and put your credentials:
 ```json
 {
   "ConnectionString": "Server=;Database=;User Id=;Password=;",
@@ -90,14 +95,36 @@ Create a `MSSQL` Database and navigate to three `appsettings.Development.json` i
   }
 }
 ```
-Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
+OPTIONAL:
+> Or you can also create a local mssql db in Docker (For outside developers or setting up faster), first pull it:
+```sh
+docker pull mcr.microsoft.com/mssql/server:2019-latest
+```
+> Run the container:
+```sh
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Ipost11%" -p 1433:1433 -d --name MSSQLIPost mcr.microsoft.com/mssql/server:2019-latest
+```
+> Use this connectionString:
+```
+Server=localhost,1433;Database=master;User Id=sa;Password=Ipost11%;
+```
+___
+5. Run the migrations:
+```
+dotnet ef database update
+```
+In order to use the functionality in the application, you have to populate 5 out of 6 tables (`buildings`, `cities`, `Package`, `Person`, and `rooms` but not `Ticket`), in the table Person, `0 = Admin` and `1 = Employee` access. The app will crash without these data.
 
-In order to use the functionality in the application, you have to put your login info into your database table Person, `0 = Admin` and `1 = Employee` access. Then you can access the dashboard.
+See [DATABASE wiki](https://github.com/FontysIPost/FIPost/wiki/Database) how you can populate the exact data into the 5 tables.
+___
+6. Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express`
+
+___
 
 
 ## 🤝 Credits & Collaboration
 
-Currently this project is being developed by semester 6 software students of the FHICT Spring 2024.
+Currently this project is being developed by semester 6 software students of the FHICT Spring 2023.
 Because this project is larger than most and should end up in production,
 it is important that everything is well documented. Even though the project will be managed by PT groups,
 every bit of help is appreciated and everyone who is willing to help out is welcome.
