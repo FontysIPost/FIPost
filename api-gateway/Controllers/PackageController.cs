@@ -39,7 +39,6 @@ namespace api_gateway.Controllers
         public async Task<ActionResult<ICollection<PackageResponseModel>>> Get([FromHeader] string Authorization)
         {
             IFlurlResponse packageResponse = await $"{Constants.PackageApiUrl}/api/packages".WithHeaders(new { Accept = "text/plain", Authorization }).GetAsync();
-            //var errPackageResponse = packageResponse.GetResponse("Er zijn nog geen pakketten");
             if (packageResponse.StatusCode != 200)
             {
                 Task<string> result = packageResponse.GetStringAsync();
@@ -155,7 +154,7 @@ namespace api_gateway.Controllers
             if (pkg.RouteFinished)
             {
                 //send email
-                await "https://mailservice20210603092014.azurewebsites.net/api/ArrivalMail?code=gYOUs9FO7WwwNXz2eSGtZM0AFxQl/RQvOJ4RF0uotwYLe7l/AIGGKg==".PostJsonAsync(pkg);
+                // await "https://mailservice20210603092014.azurewebsites.net/api/ArrivalMail?code=gYOUs9FO7WwwNXz2eSGtZM0AFxQl/RQvOJ4RF0uotwYLe7l/AIGGKg==".PostJsonAsync(pkg);
             }
 
             return CreatedAtAction("PostTicket", responseModel);
