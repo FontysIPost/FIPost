@@ -95,7 +95,7 @@ dotnet ef database update
 ```
 In order to use the functionality in the application, you have to populate 5 out of 6 tables (`buildings`, `cities`, `Package`, `Person`, and `rooms` but not `Ticket`), in the table Person, `0 = Admin` and `1 = Employee` for different access. The app will crash without these data.
 
-See [DATABASE wiki](https://github.com/FontysIPost/FIPost/wiki/Database) how you can populate the exact data into the 5 tables.
+See [DATABASE wiki](https://github.com/FontysIPost/FIPost/wiki/Database-setup) how you can populate the exact data into the 5 tables.
 ___
 4. Run all the following services, `EmployeeService: IIS Express`, `PakketService: IIS Express`, `LocatieService: IIS Express`, `authentication-service: IIS Express` and `api-gateway: IIS Express` with the frontend running.
 
